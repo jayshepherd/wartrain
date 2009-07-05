@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  path: MyString
+  directory_id: MyString
+  playable_id: 1
+  playable_type: MyString
+
+two:
+  path: MyString
+  directory_id: MyString
+  playable_id: 1
+  playable_type: MyString

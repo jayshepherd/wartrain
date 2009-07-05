@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  local_path: MyString
+  nmt_path: MyString
+  type: MyString
+  timer: 1
+
+two:
+  local_path: MyString
+  nmt_path: MyString
+  type: MyString
+  timer: 1
