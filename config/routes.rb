@@ -31,6 +31,7 @@ ActionController::Routing::Routes.draw do |map|
        admin.resources :directories, :active_scaffold => true
        admin.resources :assets, :active_scaffold => true
        admin.resources :movies, :active_scaffold => true
+       admin.resources :asset_types, :active_scaffold => true
      end
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.

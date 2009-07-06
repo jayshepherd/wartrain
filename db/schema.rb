@@ -9,7 +9,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090703212439) do
+ActiveRecord::Schema.define(:version => 20090706022802) do
+
+  create_table "asset_types", :force => true do |t|
+    t.string   "name"
+    t.string   "extension"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "asset_types_directories", :force => true do |t|
+    t.integer "asset_type_id"
+    t.integer "directory_id"
+  end
 
   create_table "assets", :force => true do |t|
     t.string   "path"
@@ -18,15 +30,17 @@ ActiveRecord::Schema.define(:version => 20090703212439) do
     t.string   "playable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "asset_type_id"
   end
 
   create_table "directories", :force => true do |t|
     t.string   "physical_path"
     t.string   "nmt_path"
-    t.string   "content_type"
     t.integer  "timer"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "digest"
+    t.string   "content_type"
   end
 
   create_table "movies", :force => true do |t|
