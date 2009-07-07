@@ -1,19 +1,42 @@
 class Asset < ActiveRecord::Base
+  # Relations
   belongs_to :playable, :polymorphic => true
   belongs_to :directory
   belongs_to :asset_type
   
-  #after_create :create_content
+  # Validations
+  validate :file_must_exist
   
-  private
+  # Callbacks
+  after_create :create_content
+  
+  # Other
+  def to_label
+    path
+  end
+  
+  protected 
+    def file_must_exist 
+      errors.add(:path, 'must exist') unless
+        File.exist?(directory.physical_path+path)
+    end 
+    
     def create_content
-      if self.directory.content_type == 'Movies'
-        #sql = "select movies.id from movies inner join 
-        #      assets on movies.id = assets.playable_id where 
-        #      assets.playable_type = 'Movie' and 
-        #      left(assets.path, instr(assets.path, '/')) = '"+
-        @title = self.path.gsub('.'+self.asset_type.extension, '').split('/').last
-        @movie = Movie.find_or_create_by_title(:title => @title)
+      debugger
+      if directory.content_type == 'Movies'
+        # Check if the asset has 'siblings'
+        #entries = Dir.entries(File.dirname(directory.physical_path+path))
+        #if entries.count > 3 
+          #entries.each do |entry|
+            #unless entry == '.' or entry == '..' 
+              #sibling = Asset.find_by_path(entry.gsub(directory.physical_path))
+              #unless sibling == nil : @movie = sibling.movie end
+              #end
+            #end
+          #if @movie == nil : Movie.find_or_create_by_title(:title => @title) end
+        #else
+          @movie = Movie.find_or_create_by_title(:title => path.split('/').first)
+        #end
         @movie.assets<<self
       end
     end
