@@ -18,11 +18,10 @@ class Asset < ActiveRecord::Base
   protected 
     def file_must_exist 
       errors.add(:path, 'must exist') unless
-        File.exist?(directory.physical_path+path)
+        File.exist?(path)
     end 
     
     def create_content
-      debugger
       if directory.content_type == 'Movies'
         # Check if the asset has 'siblings'
         #entries = Dir.entries(File.dirname(directory.physical_path+path))

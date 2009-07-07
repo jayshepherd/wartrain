@@ -11,15 +11,17 @@ class Admin::DirectoriesController < ApplicationController
     config.action_links.add(:scan, :controller => :directories, :type => :record)
   end
   
-  def scan    
+  def scan
+    require 'find'
+    
     # Load up the diretory
     directory = Directory.find(params[:id])
-    list = ''
+    list = Array.new
     @message = ''
     
     # Check if it's changed since last scan
-    Find.find(directory.physical_path) { |path| list = list+path }
-    @digest = Digest::MD5.hexdigest(list)
+    Find.find(directory.physical_path) { |path| list.push(path) }
+    @digest = Digest::MD5.hexdigest(list.to_s)
     
     # If it's changed, scan it
     unless @digest == directory.digest
@@ -35,7 +37,7 @@ class Admin::DirectoriesController < ApplicationController
       
       # Add new assets
       add_count = 0
-      Find.find(directory.physical_path) do |path|
+      list.each do |path|
         unless File.directory?(path)
           asset_extension = path.split('.').last.downcase
           asset_path = path.gsub(directory.physical_path+'/', '')
@@ -46,7 +48,7 @@ class Admin::DirectoriesController < ApplicationController
             asset.save
           end # unless asset_type
         end # unless File.directory
-      end # Files.find
+      end # list.each
       
       # clean up
       directory.update_attribute(:digest, @digest)
