@@ -40,7 +40,7 @@ class Admin::DirectoriesController < ApplicationController
       list.each do |path|
         unless File.directory?(path)
           asset_extension = path.split('.').last.downcase
-          asset_path = path.gsub(directory.physical_path+'/', '')
+          asset_path = path.gsub(directory.physical_path, '')
           asset_type = directory.asset_types.find_by_extension(asset_extension)
           unless asset_type.blank?
             asset = directory.assets.find_or_initialize_by_path(asset_path)

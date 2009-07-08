@@ -5,9 +5,10 @@ class Movie < ActiveRecord::Base
   
   private
     def build_playlist
-      file = File.new(Rails.root.join("public/playlists/movies",self.id.to_s+".jsp"), "w")
-        self.assets.each do |asset|
-          file.puts (self.title+"|0|0|"+asset.directory.nmt_path+
+      file = File.new(Rails.root.join("public/playlists/movies",id.to_s+".jsp"), "w")
+        assets.sort_by { |asset| asset[:path] }.each do |asset|
+        #assets.each do |asset|
+          file.puts (title+"|0|0|"+asset.directory.nmt_path+
                      asset.path+"|")
         end
       file.close
