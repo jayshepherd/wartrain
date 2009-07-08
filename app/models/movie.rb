@@ -6,8 +6,9 @@ class Movie < ActiveRecord::Base
   private
     def build_playlist
       file = File.new(Rails.root.join("public/playlists/movies",id.to_s+".jsp"), "w")
-        assets.sort_by { |asset| asset[:path] }.each do |asset|
-        #assets.each do |asset|
+        #debugger
+        sorted_assets = assets.find(:all, :order => 'path ASC')
+        sorted_assets.each do |asset|
           file.puts (title+"|0|0|"+asset.directory.nmt_path+
                      asset.path+"|")
         end
