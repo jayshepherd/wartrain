@@ -1,4 +1,5 @@
 class Movie < ActiveRecord::Base
+  
   # Associations
   has_many :assets, :as => :playable
   
@@ -6,20 +7,50 @@ class Movie < ActiveRecord::Base
   before_create :fetch_imdb_id
   after_save :build_playlist
   
-  # 
+  # Virtual Attributes
+  def url
+    paths = ''
+    assets.each {|a| paths<<a.path}
+    if paths.scan('/VIDEO_TS/').length > 0 then
+      return assets.first.directory.nmt_path+
+             assets.first.path.gsub(assets.first.path.split('/').last, '') 
+    else
+      if assets.length == 1 then
+        return assets.first.directory.nmt_path+assets.first.path
+      else
+        return '/playlists/movies/'+id.to_s+'.jsp'
+      end
+    end
+  end
+  
+  def vod_tag
+    paths = ''
+    assets.each {|a| paths<<a.path}
+    if paths.scan('/VIDEO_TS/').length > 0 then
+      return 'playlist'
+    else
+      return ''
+    end
+  end
+  
+  # Private Helper Methods
   private
+  
     def build_playlist
-      file = File.new(Rails.root.join("public/playlists/movies",id.to_s+".jsp"), "w")
-        sorted_assets = assets.find(:all, :order => 'path ASC')
-        sorted_assets.each do |asset|
-          file.puts(title+"|0|0|"+asset.directory.nmt_path+asset.path+"|")
-        end
-      file.close
+      sorted_assets = assets.find(:all, :order => 'path ASC')
+      paths = ''
+      assets.each {|a| paths<<a.path}
+      if sorted_assets.length > 1 and paths.scan('/VIDEO_TS/').length == 0
+        file = File.new(Rails.root.join("public/playlists/movies",id.to_s+".jsp"), "w")
+          sorted_assets.each do |asset|    
+            file.puts(title+"|0|0|"+asset.directory.nmt_path+asset.path+"|")
+          end
+        file.close
+      end
     end
     
     def fetch_imdb_id
       require 'imdb'
-    
       begin
         entry = Imdb::Search.new(title)
         unless entry.movies.first.id == nil

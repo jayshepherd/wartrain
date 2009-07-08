@@ -3,7 +3,7 @@ class Admin::MoviesController < ApplicationController
   
   active_scaffold :movie do |config|
     config.list.columns = [:title, :release_date]
-    config.show.columns = [:title, :release_date, :imdb_id, :assets]
+    config.show.columns = [:title, :release_date, :imdb_id, :assets, :url]
   end
   
   def fetch_metadata

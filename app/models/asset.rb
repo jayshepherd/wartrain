@@ -1,4 +1,5 @@
 class Asset < ActiveRecord::Base
+  
   # Associations
   belongs_to :playable, :polymorphic => true
   belongs_to :directory
@@ -10,12 +11,13 @@ class Asset < ActiveRecord::Base
   # Callbacks
   after_create :create_content
   
-  # Other
-  def to_label
+  # Virtual Attributes
+  def to_label # for ActiveScaffold
     path
   end
   
-  protected 
+  private
+  
     def file_must_exist 
       errors.add(:path, 'must exist') unless
         File.exist?(directory.physical_path+path)
