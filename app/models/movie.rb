@@ -13,7 +13,7 @@ class Movie < ActiveRecord::Base
     assets.each {|a| paths<<a.path}
     if paths.scan('/VIDEO_TS/').length > 0 then
       return assets.first.directory.nmt_path+
-             assets.first.path.gsub(assets.first.path.split('/').last, '') 
+             assets.first.path.gsub(assets.first.path.split('/').last, '').chop
     else
       if assets.length == 1 then
         return assets.first.directory.nmt_path+assets.first.path
@@ -24,9 +24,10 @@ class Movie < ActiveRecord::Base
   end
   
   def vod_tag
+    #debugger
     paths = ''
     assets.each {|a| paths<<a.path}
-    if paths.scan('/VIDEO_TS/').length > 0 then
+    if paths.scan('/VIDEO_TS/').length < 1 and assets.length > 1 then
       return 'playlist'
     else
       return ''
@@ -42,8 +43,8 @@ class Movie < ActiveRecord::Base
       assets.each {|a| paths<<a.path}
       if sorted_assets.length > 1 and paths.scan('/VIDEO_TS/').length == 0
         file = File.new(Rails.root.join("public/playlists/movies",id.to_s+".jsp"), "w")
-          sorted_assets.each do |asset|    
-            file.puts(title+"|0|0|"+asset.directory.nmt_path+asset.path+"|")
+          sorted_assets.each_with_index do |asset, idx|
+            file.puts(title+idx.to_s+"|0|0|"+asset.directory.nmt_path+asset.path+"|")
           end
         file.close
       end
