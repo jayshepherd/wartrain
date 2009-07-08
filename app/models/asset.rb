@@ -1,5 +1,5 @@
 class Asset < ActiveRecord::Base
-  # Relations
+  # Associations
   belongs_to :playable, :polymorphic => true
   belongs_to :directory
   belongs_to :asset_type

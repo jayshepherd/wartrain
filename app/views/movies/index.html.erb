@@ -1,0 +1,17 @@
+<h1>Movies</h1>
+
+<table>
+  <tr>
+  </tr>
+
+<% @movies.each do |movie| %>
+  <tr>
+	<td><%= movie.title %>
+    <td><%= link_to 'Play', 
+		 movie.assets.first.directory.nmt_path+movie.assets.first.path.split('/').first, 
+		:vod => 'playlist' %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
