@@ -1,5 +1,5 @@
 <h1>Movies</h1>
 
 <% @movies.each do |movie| %>
-	<%= link_to movie.title, movie.url, :vod => movie.vod_tag %><br />
+	<%= link_to movie.title, movie.url, html_options = movie.html_options %><br />
 <% end %>
