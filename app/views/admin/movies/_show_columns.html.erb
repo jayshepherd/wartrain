@@ -9,6 +9,6 @@
   <% end -%>
 <% end -%>
 	<dd><% unless @record.poster.nil? %>
-			<%= image_tag(@record.poster.to_s) %>
+			<br /><%= image_tag(@record.poster.to_s, :size => '200x286') %>
 		<% end %>
 </dl>

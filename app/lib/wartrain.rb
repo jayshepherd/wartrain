@@ -20,7 +20,10 @@ module WarTrain
        entry = Imdb::Movie.new(movie.imdb_id)
        if movie.release_date.nil? : movie.release_date = entry.release_date end
        unless File.exists?(Rails.root.join("public/art/movies",movie.id.to_s+'.jpg'))
-         save_url(entry.poster, Rails.root.join("public/art/movies",movie.id.to_s+'.jpg'))
+         unless entry.poster.nil?
+           save_url(entry.poster, 
+                    Rails.root.join("public/art/movies",movie.id.to_s+'.jpg')) 
+        end
        end
      end
    end

@@ -6,7 +6,6 @@ class Admin::MoviesController < ApplicationController
     config.show.columns = [:title, :release_date, :imdb_id, :assets, :url]
     config.action_links.add(:update_metadata, :controller => :movies, 
                             :type => :record)
-    #config.action_links.add(:update_all_metadata, :controller => :movies)
   end
   
   def update_metadata
@@ -16,4 +15,12 @@ class Admin::MoviesController < ApplicationController
     @movie.save
   end
   
+  def update_all_metadata
+    require 'lib/wartrain'
+    @movies = Movie.find(:all)
+    @movies.each do |movie|
+      WarTrain.fetch_metadata(movie)
+      movie.save
+    end
+  end
 end

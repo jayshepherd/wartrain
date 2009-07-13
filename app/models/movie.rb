@@ -43,7 +43,7 @@ class Movie < ActiveRecord::Base
   
   def poster
     path = Rails.root.join("public/art/movies",id.to_s+'.jpg')
-    if File.exists?(path) : "/art/movies/"+id.to_s+'.jpg' else nil end
+    if File.exists?(path) : "/art/movies/"+id.to_s+'.jpg' else "/art/movies/default.jpg" end
   end
   
   # Private Helper Methods

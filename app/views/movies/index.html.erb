@@ -1,5 +1,5 @@
 <h1>Movies</h1>
 
 <% @movies.each do |movie| %>
-	<%= link_to movie.title, movie.url, html_options = movie.html_options %><br />
+	<%= link_to image_tag(movie.poster, :border=>0, :size => '200x286'), movie.url, html_options = movie.html_options %>
 <% end %>

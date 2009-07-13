@@ -32,7 +32,8 @@ ActionController::Routing::Routes.draw do |map|
        # Directs /admin/products/* to Admin::ProductsController (app/controllers/admin/products_controller.rb)
        admin.resources :directories, :active_scaffold => true
        admin.resources :assets, :active_scaffold => true
-       admin.resources :movies, :active_scaffold => true
+       admin.resources :movies, :active_scaffold => true,
+                        :collection => {:update_all_metadata => :get}
        admin.resources :asset_types, :active_scaffold => true
      end
 
