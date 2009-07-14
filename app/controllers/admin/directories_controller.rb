@@ -76,5 +76,7 @@ class Admin::DirectoriesController < ApplicationController
     else
       @message = "Scan skipped.  The directory hasn't changed."
     end # unless @digest
+    render :layout => false
   end
+  
 end

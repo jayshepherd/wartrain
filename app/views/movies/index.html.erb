@@ -1,4 +1,4 @@
-<h1>Movies (by name)</h1>
+<h1>Movies</h1>
 <br />
 
 <% if params[:page].to_i <= 1 %>
@@ -7,12 +7,14 @@
 <% else %>
 	<% @prev_page = params[:page].to_i - 1 %>
   	<% @next_page = params[:page].to_i + 1 %>
-<% end %>>
+<% end %>
 
 <%= link_to_unless @prev_page == 0,  "Previous", {:controller => 'movies', 
-				   :action => params[:action], :page => @prev_page}, {:TVID => 'PGUP'} %> 
+				   :action => params[:action], :page => @prev_page}, 
+				  {:class => 'page_links', :TVID => 'PGUP'} %> 
 <%= link_to "Next", {:controller => 'movies', :action => params[:action], 
-                    :page => @next_page}, {:TVID => 'PGDN'} %>
+                    :page => @next_page}, {:TVID => 'PGDN', 
+	                 :class => 'page_links'} %>
 
 <table>
 	<% count = 1 %>

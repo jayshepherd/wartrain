@@ -8,4 +8,11 @@
     <dd><%= show_column_value(@record, column) -%> &nbsp;</dd>
   <% end -%>
 <% end -%>
+
+<% @movie = @record %>
+<dt>Enter URL for new poster</dt>
+<dd><% form_tag :action => 'update_poster', :method => 'get', :id => params[:id] do %>
+	<%= text_field_tag :poster_url, params[:poster_url] %>
+	<%= submit_tag "Update Poster", :name => nil %>
+<% end %></dd>
 </dl>

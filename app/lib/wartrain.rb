@@ -16,30 +16,29 @@ module WarTrain
      require 'imdb'
      if movie.imdb_id.nil? : fetch_imdb_id(movie) end
      unless movie.imdb_id.nil?
-       entry = Imdb::Movie.new(movie.imdb_id)
+       entry = Imdb::Movie.new (movie.imdb_id)
        # Update release date
        if movie.release_date.nil? : movie.release_date = entry.release_date end
-       # Download poster
-       unless File.exists?(Rails.root.join("public/art/movies",movie.id.to_s+'.jpg'))
-         unless entry.poster.nil?
-           save_url(entry.poster, 
-                    Rails.root.join("public/art/movies",movie.id.to_s+'.jpg')) 
-         end
-       end
-       # Resize poster
-       if File.exists?(Rails.root.join("public/art/movies",movie.id.to_s+'.jpg'))
-         resize_poster(Rails.root.join("public/art/movies",movie.id.to_s+'.jpg'))
-       end
      end
+     # Get Google URL
+     url = google_poster (movie.title+' poster') # entry.poster
+     # Update poster
+     path = Rails.root.join('public/art/movies',movie.id.to_s+'.jpg')
+     unless File.exists?(path) : update_poster(url, path) end
+   end
+   
+   def self.update_poster(url, path)
+     unless url.nil? : save_url(url, path) end
+     if File.exists?(path) : resize_poster(path) end
    end
    
    def self.save_url(url, path)
      require 'net/http'
-     
-     server = url.split('/').third
+     url = url.gsub('http://', '')
+     server = url.split('/').first
      remote_path = url.gsub(server, '')
      
-     Net::HTTP.start(server) { |http|
+     Net::HTTP.start (server) { |http|
        resp = http.get(remote_path)
        open( path, 'w' ) { |file|
          file.write(resp.body)
@@ -47,12 +46,24 @@ module WarTrain
      }
    end
    
-   def self.resize_poster(path)
+   def self.resize_poster (path)
      require 'rubygems'
      require 'mini_magick'
-     image = MiniMagick::Image.from_file(path.to_s)
+     image = MiniMagick::Image.from_file(path)
      image.resize "270x410"
      image.write(path.to_s)
    end
   
+   # Based on 
+   # http://www.swards.net/2009/04/google-image-search-in-rails-using.html
+   def self.google_poster (keyword)
+     require 'json'
+     url = "http://ajax.googleapis.com/ajax/services/search/images?sz=large&q=#{CGI.escape(keyword)}&v=1.0"
+     json_results = open(url) {|f| f.read };
+     results = JSON.parse(json_results)
+     image_array = results['responseData']['results']
+     image = image_array[0] if image_array
+     return image['unescapedUrl']
+   end
+   
 end
