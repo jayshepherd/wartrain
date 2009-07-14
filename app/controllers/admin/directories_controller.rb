@@ -10,6 +10,14 @@ class Admin::DirectoriesController < ApplicationController
     config.action_links.add(:scan, :controller => :directories, :type => :record)
   end
   
+  def scan_all
+    directories = Directory.find(:all)
+    directories.each do |directory|
+      redirect_to :controller => "directories", :action => "scan", 
+                  :id => directory.id
+    end
+  end
+  
   def scan
     require 'find'
     

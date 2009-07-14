@@ -1,5 +1,26 @@
-<h1>Movies</h1>
+<h1>Movies (by name)</h1>
+<br />
 
-<% @movies.each do |movie| %>
-	<%= link_to image_tag(movie.poster, :border=>0, :size => '200x286'), movie.url, html_options = movie.html_options %>
-<% end %>
+<% if params[:page].to_i <= 1 %>
+	<% @prev_page = 0 %>
+  	<% @next_page = 2 %>
+<% else %>
+	<% @prev_page = params[:page].to_i - 1 %>
+  	<% @next_page = params[:page].to_i + 1 %>
+<% end %>>
+
+<%= link_to_unless @prev_page == 0,  "Previous", {:controller => 'movies', 
+				   :action => params[:action], :page => @prev_page}, {:TVID => 'PGUP'} %> 
+<%= link_to "Next", {:controller => 'movies', :action => params[:action], 
+                    :page => @next_page}, {:TVID => 'PGDN'} %>
+
+<table>
+	<% count = 1 %>
+	<% @movies.each do |movie| %>
+		<% if count%6 == 1 %><tr><% end %>
+		<td><%= link_to image_tag(movie.poster, :border=>0, :size=>'162x246'), 
+				movie.url, html_options = movie.html_options %><br />
+		<% if count%6 == 0 %></tr><% end %>
+		<% count = count + 1%>
+	<% end %>
+</table>

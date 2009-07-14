@@ -5,6 +5,7 @@ class Movie < ActiveRecord::Base
   
   # Callbacks
   before_create :populate_metadata
+  before_save :populate_sort_title
   after_save :build_playlist
   
   # Virtual Attributes
@@ -65,5 +66,12 @@ class Movie < ActiveRecord::Base
     def populate_metadata
       require 'lib/wartrain'
       WarTrain.fetch_metadata(self)
+    end
+    
+    def populate_sort_title
+      self.sort_title = self.title
+      if self.title.index('The ') == 0 : self.sort_title = self.title.gsub('The ', '') end
+      if self.title.index('A ') == 0 : self.sort_title = self.title.gsub('A ', '') end
+      if self.title.index('An ') == 0 : self.sort_title = self.title.gsub('An ', '') end
     end
 end

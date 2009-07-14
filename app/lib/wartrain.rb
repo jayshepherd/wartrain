@@ -13,21 +13,26 @@ module WarTrain
    end
 
    def self.fetch_metadata(movie)
-     debugger
      require 'imdb'
      if movie.imdb_id.nil? : fetch_imdb_id(movie) end
      unless movie.imdb_id.nil?
        entry = Imdb::Movie.new(movie.imdb_id)
+       # Update release date
        if movie.release_date.nil? : movie.release_date = entry.release_date end
+       # Download poster
        unless File.exists?(Rails.root.join("public/art/movies",movie.id.to_s+'.jpg'))
          unless entry.poster.nil?
            save_url(entry.poster, 
                     Rails.root.join("public/art/movies",movie.id.to_s+'.jpg')) 
-        end
+         end
+       end
+       # Resize poster
+       if File.exists?(Rails.root.join("public/art/movies",movie.id.to_s+'.jpg'))
+         resize_poster(Rails.root.join("public/art/movies",movie.id.to_s+'.jpg'))
        end
      end
    end
-  
+   
    def self.save_url(url, path)
      require 'net/http'
      
@@ -42,4 +47,12 @@ module WarTrain
      }
    end
    
+   def self.resize_poster(path)
+     require 'rubygems'
+     require 'mini_magick'
+     image = MiniMagick::Image.from_file(path.to_s)
+     image.resize "270x410"
+     image.write(path.to_s)
+   end
+  
 end

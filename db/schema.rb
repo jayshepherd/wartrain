@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090706022802) do
+ActiveRecord::Schema.define(:version => 20090714051415) do
 
   create_table "asset_types", :force => true do |t|
     t.string   "name"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20090706022802) do
     t.string   "imdb_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "sort_title"
   end
 
 end

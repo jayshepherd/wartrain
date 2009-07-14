@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :movies
-
+  #map.connect '/movies/newest', :controller => :movies, :action => :newest
+  #map.resources :movies
   
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -30,11 +30,14 @@ ActionController::Routing::Routes.draw do |map|
   # Sample resource route within a namespace:
      map.namespace :admin do |admin|
        # Directs /admin/products/* to Admin::ProductsController (app/controllers/admin/products_controller.rb)
-       admin.resources :directories, :active_scaffold => true
+       admin.resources :directories, :active_scaffold => true, 
+                       :collection => {:scan_all => :get}
        admin.resources :assets, :active_scaffold => true
        admin.resources :movies, :active_scaffold => true,
-                        :collection => {:update_all_metadata => :get}
+                       :collection => {:update_all_metadata => :get, 
+                                       :update_metadata => :get}
        admin.resources :asset_types, :active_scaffold => true
+       
      end
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.

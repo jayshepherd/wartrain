@@ -7,8 +7,18 @@
   <title>WarTrain Admin - <%= controller.controller_name.titleize -%></title>
   <%= javascript_include_tag :defaults %>
   <%= active_scaffold_includes %>
+  <%= stylesheet_link_tag('admin') %>
 </head>
 <body>
+		
+<%= link_to "Asset Types", {:controller => "asset_types", :action => "index"}, 
+            {:class => 'admin_menu'} %> - 
+<%= link_to "Assets", {:controller => "assets", :action => "index"},
+ 			{:class => 'admin_menu'} %> -
+<%= link_to "Directories", {:controller => "directories", :action => "index"},
+ 			{:class => 'admin_menu'} %> - 
+<%= link_to "Movies", {:controller => "movies", :action => "index"},
+ 			{:class => 'admin_menu'} %> -
 
 <%= yield  %>
 

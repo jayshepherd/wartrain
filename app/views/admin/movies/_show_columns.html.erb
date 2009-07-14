@@ -8,7 +8,4 @@
     <dd><%= show_column_value(@record, column) -%> &nbsp;</dd>
   <% end -%>
 <% end -%>
-	<dd><% unless @record.poster.nil? %>
-			<br /><%= image_tag(@record.poster.to_s, :size => '200x286') %>
-		<% end %>
 </dl>
