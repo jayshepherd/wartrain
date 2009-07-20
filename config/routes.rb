@@ -29,7 +29,6 @@ ActionController::Routing::Routes.draw do |map|
 
   # Sample resource route within a namespace:
      map.namespace :admin do |admin|
-       # Directs /admin/products/* to Admin::ProductsController (app/controllers/admin/products_controller.rb)
        admin.resources :directories, :active_scaffold => true, 
                        :collection => {:scan_all => :get}
        admin.resources :assets, :active_scaffold => true
@@ -39,9 +38,11 @@ ActionController::Routing::Routes.draw do |map|
        admin.resources :asset_types, :active_scaffold => true
        
      end
-
+     
+   map.connect 'admin', :controller => 'admin/directories'
+   
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-   map.root :controller => "movies"
+   map.root :controller => "content_types"
 
   # See how all your routes lay out with "rake routes"
 
@@ -50,5 +51,4 @@ ActionController::Routing::Routes.draw do |map|
   # consider removing the them or commenting them out if you're using named routes and resources.
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
-  map.root :controller => 'movies'
 end

@@ -10,68 +10,30 @@ class Admin::DirectoriesController < ApplicationController
     config.action_links.add(:scan, :controller => :directories, :type => :record)
   end
   
-  def scan_all
+  def self.scan_all
     directories = Directory.find(:all)
     directories.each do |directory|
-      redirect_to :controller => "directories", :action => "scan", 
-                  :id => directory.id
+      directory.scan
     end
   end
   
   def scan
-    require 'find'
-    
-    # Load up the diretory
     directory = Directory.find(params[:id])
-    list = Array.new
-    @message = ''
-    
-    # Check if it's changed since last scan
-    Find.find(directory.physical_path) { |path| list.push(path) }
-    @digest = Digest::MD5.hexdigest(list.to_s)
-    
-    # If it's changed, scan it
-    unless @digest == directory.digest
-      
-      # Delete old assets
-      delete_count = 0
-      Asset.find(:all).each do |asset|
-        unless File.exists?(asset.directory.physical_path+'/'+asset.path)
-          Asset.delete(asset.id)
-          delete_count = delete_count.next
-        end
-      end
-      
-      # Add new assets
-      add_count = 0
-      list.each do |path|
-        unless File.directory?(path)
-          asset_extension = path.split('.').last.downcase
-          asset_path = path.gsub(directory.physical_path, '')
-          asset_type = directory.asset_types.find_by_extension(asset_extension)
-          unless asset_type.blank?
-            asset = directory.assets.find_or_initialize_by_path(asset_path)
-            if asset.new_record? : add_count = add_count.next end
-            asset.save
-          end # unless asset_type
-        end # unless File.directory
-      end # list.each
-      
-      # clean up
-      directory.update_attribute(:digest, @digest)
-      if add_count == 0 then
+    results = directory.scan
+    if results[:scanned] 
+      if results[:added] == 0
         @message = 'No new assets were added.'
-      elsif add_count == 1 then
+      elsif results[:added] == 1 
         @messsage = 'One new asset was added.'
       else
-        @message = add_count.to_s+' new assets were added.'
+        @message = results[:added].to_s+' new assets were added.'
       end
-      if delete_count == 0 then
+      if results[:deleted] == 0 
         @message << ' No assets were delete.'
-      elsif delete_count == 1 then
+      elsif results[:deleted] == 1
         @message << ' One asset was deleted.'
       else
-        @message << ' '+delete_count.to_s+' assets were deleted.'
+        @message << ' '+results[:deleted].to_s+' assets were deleted.'
       end
     else
       @message = "Scan skipped.  The directory hasn't changed."

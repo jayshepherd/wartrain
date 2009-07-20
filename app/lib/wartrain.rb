@@ -21,7 +21,7 @@ module WarTrain
        if movie.release_date.nil? : movie.release_date = entry.release_date end
      end
      # Get Google URL
-     url = google_poster (movie.title+' poster') # entry.poster
+     url = google_poster (movie.title+' movie poster') # entry.poster
      # Update poster
      path = Rails.root.join('public/art/movies',movie.id.to_s+'.jpg')
      unless File.exists?(path) : update_poster(url, path) end

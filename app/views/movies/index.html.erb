@@ -1,5 +1,4 @@
-<h1>Movies</h1>
-<br />
+<h2>Movies</h2><br />
 
 <% if params[:page].to_i <= 1 %>
 	<% @prev_page = 0 %>
@@ -9,12 +8,16 @@
   	<% @next_page = params[:page].to_i + 1 %>
 <% end %>
 
-<%= link_to_unless @prev_page == 0,  "Previous", {:controller => 'movies', 
-				   :action => params[:action], :page => @prev_page}, 
-				  {:class => 'page_links', :TVID => 'PGUP'} %> 
-<%= link_to "Next", {:controller => 'movies', :action => params[:action], 
+<table class="top_links"><tr>
+<td align='left'><% unless @prev_page == 0 %>
+		<%= link_to  "Previous", {:controller => 'movies',
+			         :action => params[:action], :page => @prev_page}, 
+				     {:class => 'page_links', :TVID => 'PGUP'} %>
+	<% end %></td>
+<td align='right'><%= link_to "Next", {:controller => 'movies', :action => params[:action], 
                     :page => @next_page}, {:TVID => 'PGDN', 
-	                 :class => 'page_links'} %>
+	                 :class => 'page_links'} %><td>
+</tr></table>
 
 <table>
 	<% count = 1 %>
@@ -25,4 +28,16 @@
 		<% if count%6 == 0 %></tr><% end %>
 		<% count = count + 1%>
 	<% end %>
+</table>
+
+<table class="bottom_links">
+<tr>
+<td><%= link_to "Home", "/", {:class => 'page_links', :TVID => 'RED'}%></td><td />
+
+<td><%= link_to "All", {:controller => 'movies', :action => 'index'}, 
+                      {:class => 'page_links', :TVID => 'GREEN'} %></td><td />
+
+<td><%= link_to "Newest", {:controller => 'movies', :action => 'newest'}, 
+                      {:class => 'page_links', :TVID => 'YELLOW'} %></td><td />
+</tr>
 </table>
