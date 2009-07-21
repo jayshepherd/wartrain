@@ -9,8 +9,8 @@ class Directory < ActiveRecord::Base
     physical_path
   end
 
+  # Public instance methods
   def scan
-    debugger
     require 'find'
     
     # Load up the diretory

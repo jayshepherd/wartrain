@@ -1,10 +1,15 @@
 class Movie < ActiveRecord::Base
   
+  # Includes and contants
+  require 'lib/art'
+  include Art
+  DEFAULT_POSTER = "/art/movies/default.jpg"
+  
   # Associations
   has_many :assets, :as => :playable
   
   # Callbacks
-  before_create :populate_metadata
+  before_create :populate_imdb_id, :populate_metadata
   before_save :populate_sort_title
   after_save :build_playlist
   
@@ -44,10 +49,30 @@ class Movie < ActiveRecord::Base
   
   def poster
     path = Rails.root.join("public/art/movies",id.to_s+'.jpg')
-    if File.exists?(path) : "/art/movies/"+id.to_s+'.jpg' else "/art/movies/default.jpg" end
+    if File.exists?(path) : "/art/movies/"+id.to_s+'.jpg' else DEFAULT_POSTER end
   end
   
-  # Private Helper Methods
+  # Public Instance Methods
+  def populate_metadata
+    require 'imdb'
+    require 'json'
+    
+    if imdb_id.nil? : populate_imdb_id end
+    unless imdb_id.nil?
+      @imdb_entry = Imdb::Movie.new(imdb_id)
+      # Update release date
+      if release_date.nil? : self.release_date = @imdb_entry.release_date end
+    end
+    # Update poster
+    if poster = DEFAULT_POSTER : update_poster(nil) end
+  end
+  
+  def update_poster(url)
+    if url.nil? : url = google_art(title+' movie poster') end
+    update_art(url, Rails.root.join("public/art/movies",id.to_s+'.jpg'))
+  end
+  
+  # Private Instance Methods
   private
   
     def build_playlist
@@ -63,9 +88,17 @@ class Movie < ActiveRecord::Base
       end
     end
     
-    def populate_metadata
-      require 'lib/wartrain'
-      WarTrain.fetch_metadata(self)
+    def populate_imdb_id 
+      debugger
+      require 'imdb'
+      begin
+        @imdb_entry = Imdb::Search.new(title)
+        unless @imdb_entry.movies.empty?
+          self.imdb_id = @imdb_entry.movies.first.id 
+        end
+      rescue NoMethodError
+        # do nothing... problem with Imdb::Search returning nils
+      end
     end
     
     def populate_sort_title
@@ -74,4 +107,5 @@ class Movie < ActiveRecord::Base
       if self.title.index('A ') == 0 : self.sort_title = self.title.gsub('A ', '') end
       if self.title.index('An ') == 0 : self.sort_title = self.title.gsub('An ', '') end
     end
+    
 end
