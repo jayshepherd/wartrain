@@ -3,7 +3,7 @@ class Movie < ActiveRecord::Base
   # Includes and contants
   require 'lib/art'
   include Art
-  DEFAULT_POSTER = "/art/movies/default.jpg"
+  DEFAULT_POSTER = 'art/movies/default.jpg'
   
   # Associations
   has_many :assets, :as => :playable
@@ -17,14 +17,14 @@ class Movie < ActiveRecord::Base
   def url
     paths = ''
     assets.each {|a| paths<<a.path}
-    if paths.scan("/VIDEO_TS/").length > 0 then
+    if paths.scan('/VIDEO_TS/').length > 0 then
       return assets.first.directory.nmt_path+
-             assets.first.path.gsub(assets.first.path.split("/").last, "").chop
+             assets.first.path.gsub(assets.first.path.split('/').last, '').chop
     else
       if assets.length == 1 then
         return assets.first.directory.nmt_path+assets.first.path
       else
-        return "/playlists/movies/"+id.to_s+".jsp"
+        return '/playlists/movies/'+id.to_s+'.jsp'
       end
     end
   end
@@ -34,7 +34,7 @@ class Movie < ActiveRecord::Base
     paths = ''
     assets.each {|a| paths<<a.path}
     
-    if (paths.upcase.scan("/VIDEO_TS/").length > 0) or (paths.upcase.scan(".ISO").length > 0) then
+    if (paths.upcase.scan('/VIDEO_TS/').length > 0) or (paths.upcase.scan(".ISO").length > 0) then
       # TVID="Play" name="Play" zcd="2" vod=""
       @html_options = {:vod => "", :zcd => "2"}
     else
@@ -102,10 +102,11 @@ class Movie < ActiveRecord::Base
     end
     
     def populate_sort_title
-      self.sort_title = self.title
-      if self.title.index('The ') == 0 : self.sort_title = self.title.gsub('The ', '') end
-      if self.title.index('A ') == 0 : self.sort_title = self.title.gsub('A ', '') end
-      if self.title.index('An ') == 0 : self.sort_title = self.title.gsub('An ', '') end
+      if self.title_changed?
+        self.sort_title = self.title
+        if self.title.index('The ') == 0 : self.sort_title = self.title.gsub('The ', '') end
+        if self.title.index('A ') == 0 : self.sort_title = self.title.gsub('A ', '') end
+        if self.title.index('An ') == 0 : self.sort_title = self.title.gsub('An ', '') end
+      end
     end
-    
 end

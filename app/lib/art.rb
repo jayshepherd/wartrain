@@ -9,7 +9,7 @@ module Art
    # http://www.swards.net/2009/04/google-image-search-in-rails-using.html
    def google_art(keyword)
      require 'json'
-     url = "http://ajax.googleapis.com/ajax/services/search/images?sz=large&q=#{CGI.escape(keyword)}&v=1.0"
+     url = 'http://ajax.googleapis.com/ajax/services/search/images?sz=large&q=#{CGI.escape(keyword)}&v=1.0'
      json_results = open(url) {|f| f.read };
      results = JSON.parse(json_results)
      image_array = results['responseData']['results']
@@ -22,10 +22,10 @@ private
   def save_url(url, path)
     require 'net/http'
     url = url.gsub('http://', '')
-    server = url.split('/').first
-    remote_path = url.gsub(server, '')
+    @server = url.split('/').first
+    remote_path = url.gsub(@server, '')
     
-    Net::HTTP.start(server) { |http|
+    Net::HTTP.start(@server) { |http|
       resp = http.get(remote_path)
       open( path, 'w' ) { |file|
         file.write(resp.body)
@@ -37,7 +37,7 @@ private
     require 'rubygems'
     require 'mini_magick'
     image = MiniMagick::Image.from_file(path)
-    image.resize "270x410"
+    image.resize '270x410'
     image.write(path.to_s)
   end
   

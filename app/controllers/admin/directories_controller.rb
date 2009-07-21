@@ -1,12 +1,11 @@
 class Admin::DirectoriesController < ApplicationController
-  layout "admin"
+  layout 'admin'
   
   active_scaffold :directory do |config|
-    config.list.columns = [:content_type, :physical_path, :nmt_path, :timer]
-    config.show.columns = [:content_type, :physical_path, :nmt_path, :timer,
-                           :asset_types, :digest]
-    config.update.columns = [:content_type, :physical_path, :nmt_path, 
-                             :timer, :asset_types]
+    config.list.columns = [:content_type, :physical_path, :nmt_path]
+    config.show.columns = [:content_type, :physical_path, :nmt_path, :asset_types,
+                           :digest]
+    config.update.columns = [:content_type, :physical_path, :nmt_path, :asset_types]
     config.action_links.add(:scan, :controller => :directories, :type => :record)
   end
   

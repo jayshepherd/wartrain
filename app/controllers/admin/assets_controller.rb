@@ -1,5 +1,5 @@
 class Admin::AssetsController < ApplicationController
-  layout "admin"
+  layout 'admin'
   
   active_scaffold :asset do |config|
     config.columns[:directory].form_ui = :select

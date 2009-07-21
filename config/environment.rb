@@ -41,4 +41,8 @@ Rails::Initializer.run do |config|
   
   config.gem 'mislav-will_paginate', :version => '~> 2.3.8', :lib => 'will_paginate', 
              :source => 'http://gems.github.com'
+  config.gem 'mini_magick', :version => '~> 1.2.5'
+  config.gem 'json', :version => '~> 1.1.7'
+  config.gem 'javan-whenever', :version => '~> 0.3.6', :lib => 'whenever'
+  config.gem 'cschiewek-imdb', :version => '=> 0.5.1', :lib => 'imdb' 
 end

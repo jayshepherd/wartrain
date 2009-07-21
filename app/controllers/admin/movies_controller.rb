@@ -1,5 +1,5 @@
 class Admin::MoviesController < ApplicationController
-  layout "admin"
+  layout 'admin'
   
   active_scaffold :movie do |config|
     config.list.per_page = 20
@@ -15,10 +15,10 @@ class Admin::MoviesController < ApplicationController
     @movie = Movie.find_by_id(params[:id])
     @movie.populate_metadata
     @movie.save!
-    render (:template => 'admin/movies/status', :layout => false) 
+    render(:template => 'admin/movies/status', :layout => false) 
   end
   
-  def update_all_metadata
+  def self.update_all_metadata
     @movies = Movie.find(:all)
     @movies.each do |movie|
       begin
@@ -31,7 +31,6 @@ class Admin::MoviesController < ApplicationController
   end
   
   def update_poster
-    require 'lib/wartrain'
     @movie = Movie.find_by_id(params[:id])
     @movie.update_poster(params[:poster_url])
     redirect_to :controller =>  'admin/movies'

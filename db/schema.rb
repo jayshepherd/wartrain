@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090714051415) do
+ActiveRecord::Schema.define(:version => 20090721030650) do
 
   create_table "asset_types", :force => true do |t|
     t.string   "name"
@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(:version => 20090714051415) do
   create_table "directories", :force => true do |t|
     t.string   "physical_path"
     t.string   "nmt_path"
-    t.integer  "timer"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "digest"

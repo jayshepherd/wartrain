@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 5.minutes do
-  runner 'Admin::MoviesController.update_all_metadata'
-end
+#every 5.minutes do
+#  runner 'Admin::DirectoriesController.scan_all'
+#end
