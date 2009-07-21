@@ -9,7 +9,7 @@ module Art
    # http://www.swards.net/2009/04/google-image-search-in-rails-using.html
    def google_art(keyword)
      require 'json'
-     url = 'http://ajax.googleapis.com/ajax/services/search/images?sz=large&q=#{CGI.escape(keyword)}&v=1.0'
+     url = "http://ajax.googleapis.com/ajax/services/search/images?sz=large&q=#{CGI.escape(keyword)}&v=1.0"
      json_results = open(url) {|f| f.read };
      results = JSON.parse(json_results)
      image_array = results['responseData']['results']
