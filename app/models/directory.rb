@@ -23,8 +23,10 @@ class Directory < ActiveRecord::Base
        
     
     # If it's changed, scan it
-    unless @new_digest == digest
-      digest = @new_digest
+    if @new_digest == digest
+      @results[:scanned] = false
+    else
+      self.digest = @new_digest
       @results[:scanned] = true
       
       # Delete old assets
@@ -48,6 +50,7 @@ class Directory < ActiveRecord::Base
           end # asset_types.each
         end # unless File.directory
       end # @list.each
+      self.save
     end
     return @results
   end

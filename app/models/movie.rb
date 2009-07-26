@@ -7,6 +7,7 @@ class Movie < ActiveRecord::Base
   
   # Associations
   has_many :assets, :as => :playable, :after_remove => :delete_empty_movie
+  has_and_belongs_to_many :genres
   
   # Callbacks
   before_create :populate_imdb_id
