@@ -6,10 +6,11 @@ class Movie < ActiveRecord::Base
   DEFAULT_POSTER = 'art/movies/default.jpg'
   
   # Associations
-  has_many :assets, :as => :playable
+  has_many :assets, :as => :playable, :after_remove => :delete_empty_movie
   
   # Callbacks
-  before_create :populate_imdb_id, :populate_metadata
+  before_create :populate_imdb_id
+  before_create :populate_metadata
   before_save :populate_sort_title
   after_save :build_playlist
   
@@ -108,5 +109,9 @@ class Movie < ActiveRecord::Base
         if self.title.index('A ') == 0 : self.sort_title = self.title.gsub('A ', '') end
         if self.title.index('An ') == 0 : self.sort_title = self.title.gsub('An ', '') end
       end
+    end
+    
+    def delete_empty_movie
+      if assets.empty? : self.delete end
     end
 end

@@ -23,7 +23,7 @@ class Admin::MoviesController < ApplicationController
     @movies.each do |movie|
       begin
         movie.populate_metada
-        movie.save
+        movie.save!
       rescue
         nil
       end

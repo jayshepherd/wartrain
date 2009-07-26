@@ -9,36 +9,45 @@ module Art
    # http://www.swards.net/2009/04/google-image-search-in-rails-using.html
    def google_art(keyword)
      require 'json'
-     url = "http://ajax.googleapis.com/ajax/services/search/images?sz=large&q=#{CGI.escape(keyword)}&v=1.0"
+     url = "http://ajax.googleapis.com/ajax/services/search/images?"
+     url<<"sz=large&q=#{CGI.escape(keyword)}&v=1.0&as_filetype=jpg"
      json_results = open(url) {|f| f.read };
      results = JSON.parse(json_results)
      image_array = results['responseData']['results']
      image = image_array[0] if image_array
      return image['unescapedUrl']
-    end
+   end
     
 private 
 
   def save_url(url, path)
     require 'net/http'
-    url = url.gsub('http://', '')
-    @server = url.split('/').first
-    remote_path = url.gsub(@server, '')
-    
-    Net::HTTP.start(@server) { |http|
-      resp = http.get(remote_path)
-      open( path, 'w' ) { |file|
-        file.write(resp.body)
-      }
-    }
+    begin  
+      url = url.gsub('http://', '')
+      @server = url.split('/').first
+      remote_path = url.gsub(@server, '')
+      unless @server.nil? or remote_path.nil?
+        Net::HTTP.start(@server) { |http|
+          resp = http.get(remote_path)
+          open( path, 'w' ) { |file|
+            file.write(resp.body)
+          }
+        }
+      end
+    rescue
+    end
   end
   
   def resize(path)
     require 'rubygems'
     require 'mini_magick'
-    image = MiniMagick::Image.from_file(path)
-    image.resize '270x410'
-    image.write(path.to_s)
+    begin
+      image = MiniMagick::Image.from_file(path) 
+      image.resize '270x410' 
+      image.write(path.to_s)
+    rescue 
+      nil
+    end
   end
   
 end

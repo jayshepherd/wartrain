@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController  
   def index
-    @movies = Movie.paginate :page => params[:page], :order => 'sort_title ASC', 
+    @movies = Movie.paginate :page => params[:page], :order => :sort_title, 
                              :per_page => 12
   end
   
@@ -10,14 +10,7 @@ class MoviesController < ApplicationController
     render :template => 'movies/index'
   end
 
-  # GET /movies/1
-  # GET /movies/1.xml
   def show
     @movie = Movie.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @movie }
-    end
-  end    
+  end
 end

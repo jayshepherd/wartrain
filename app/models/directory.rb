@@ -38,14 +38,14 @@ class Directory < ActiveRecord::Base
       # Add new assets
       @list.each do |path|
         unless File.directory?(path)
-          asset_extension = path.split('.').last.downcase
-          asset_path = path.gsub(physical_path, '')
-          asset_type = asset_types.find_by_extension(asset_extension)
-          unless asset_type.blank?
-            asset = assets.find_or_initialize_by_path(asset_path)
-            if asset.new_record? : @results[:added] = @results[:added].next end
-            asset.save
-          end # unless asset_type
+          asset_types.each do |type|
+            unless path.index(Regexp.new(type.regex, Regexp::IGNORECASE)).nil?
+              debugger
+              asset = assets.find_or_initialize_by_path(path.gsub(physical_path, ''))
+              if asset.new_record? : @results[:added] = @results[:added].next end
+              asset.save
+            end # unless path
+          end # asset_types.each
         end # unless File.directory
       end # @list.each
     end
