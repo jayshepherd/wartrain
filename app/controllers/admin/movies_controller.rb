@@ -18,16 +18,18 @@ class Admin::MoviesController < ApplicationController
     render(:template => 'admin/movies/status', :layout => false) 
   end
   
-  def self.update_all_metadata
+  def update_all_metadata
     @movies = Movie.find(:all)
     @movies.each do |movie|
       begin
-        movie.populate_metada
+        movie.populate_metadata
         movie.save!
+        @movie = movie
       rescue
         nil
       end
     end
+    render :nothing => true
   end
   
   def update_poster
