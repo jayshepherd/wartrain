@@ -20,7 +20,6 @@ class Directory < ActiveRecord::Base
     # Check if it's changed since last scan
     Find.find(physical_path) { |path| @list.push(path) }
     @new_digest = Digest::MD5.hexdigest(@list.to_s)
-       
     
     # If it's changed, scan it
     if @new_digest == digest

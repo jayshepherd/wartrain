@@ -36,7 +36,7 @@ ActionController::Routing::Routes.draw do |map|
                        :collection => {:update_all_metadata => :get, 
                                        :update_metadata => :get}
        admin.resources :asset_types, :active_scaffold => true
-       
+       admin.resources :genres, :active_scaffold => true
      end
      
    map.connect 'admin', :controller => 'admin/directories'

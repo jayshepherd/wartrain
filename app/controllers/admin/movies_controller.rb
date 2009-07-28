@@ -4,7 +4,8 @@ class Admin::MoviesController < ApplicationController
   active_scaffold :movie do |config|
     config.list.per_page = 20
     config.list.columns = [:title, :sort_title, :release_date, :created_at]
-    config.show.columns = [:title, :release_date, :imdb_id, :assets, :url, :poster]
+    config.show.columns = [:title, :release_date, :imdb_id, :assets, :url, :poster,
+                           :genres]
     config.action_links.add(:update_metadata, :controller => :movies, 
                             :type => :record)
     config.action_links.add(:update_all_metadata, :controller => :movies, 

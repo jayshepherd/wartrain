@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090726221823) do
+ActiveRecord::Schema.define(:version => 20090727041555) do
 
   create_table "asset_types", :force => true do |t|
     t.string   "name"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(:version => 20090726221823) do
     t.datetime "updated_at"
   end
 
-  create_table "genres_movies", :force => true do |t|
+  create_table "genres_movies", :id => false, :force => true do |t|
     t.integer  "genre_id"
     t.integer  "movie_id"
     t.datetime "created_at"

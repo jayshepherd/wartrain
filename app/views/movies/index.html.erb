@@ -11,12 +11,15 @@
 <table class="top_links"><tr>
 <td align='left'><% unless @prev_page == 0 %>
 		<%= link_to  "Previous", {:controller => 'movies',
-			         :action => params[:action], :page => @prev_page}, 
-				     {:class => 'page_links', :TVID => 'PGUP'} %>
+			         :action => params[:action], :genre => params[:genre], 
+			         :page => @prev_page}, {:class => 'page_links', 
+				     :TVID => 'PGUP'} %>
 	<% end %></td>
-<td align='right'><%= link_to "Next", {:controller => 'movies', :action => params[:action], 
-                    :page => @next_page}, {:TVID => 'PGDN', 
-	                 :class => 'page_links'} %><td>
+<td align='right'>
+		<%= link_to "Next", {:controller => 'movies', :action => params[:action], 
+                    :genre => params[:genre], :page => @next_page}, {:TVID => 'PGDN', 
+	                :class => 'page_links'} %>
+	</td>
 </tr></table>
 
 <table>
