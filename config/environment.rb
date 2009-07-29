@@ -43,7 +43,7 @@ Rails::Initializer.run do |config|
              :source => 'http://gems.github.com'
   config.gem 'mini_magick', :version => '~> 1.2.5'
   config.gem 'json', :version => '~> 1.1.7'
-  #config.gem 'javan-whenever', :version => '~> 0.3.6', :lib => 'whenever'
+  config.gem 'javan-whenever', :version => '~> 0.3.6', :lib => 'whenever'
   config.gem 'cschiewek-imdb', :version => '~> 0.5.1', :lib => 'imdb', 
              :source => 'http://gems.github.com'
 end
