@@ -1,4 +1,6 @@
-<h2>Movies</h2><br />
+<h2>Movies
+    <%= ' - '+@genre.name.titleize unless params[:genre].nil? %>
+</h2><br />
 
 <% if params[:page].to_i <= 1 %>
 	<% @prev_page = 0 %>
@@ -42,5 +44,9 @@
 
 <td><%= link_to "Newest", {:controller => 'movies', :action => 'newest'}, 
                       {:class => 'page_links', :TVID => 'GREEN'} %></td><td />
+<td><%= link_to "Genres", {:controller => 'movies', :action => 'genres'}, 
+                      {:class => 'page_links', :TVID => 'YELLOW'} %></td><td />
+<td><%= link_to "People", {:controller => 'movies', :action => 'people'}, 
+					  {:class => 'page_links', :TVID => 'BLUE'} %></td><td />
 </tr>
 </table>

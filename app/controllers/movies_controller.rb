@@ -7,6 +7,7 @@ class MoviesController < ApplicationController
       sql = "select distinct movies.id from movies inner join genres_movies on 
              movies.id = genres_movies.movie_id where genre_id = #{params[:genre]} 
              order by movies.sort_title"
+      @genre = Genre.find(params[:genre])
       @movies = Movie.paginate_by_sql sql, :page => params[:page], :per_page => 12
     end
   end

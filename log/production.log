@@ -1,0 +1,234 @@
+
+
+Processing MoviesController#index (for 127.0.0.1 at 2009-07-28 01:26:34) [GET]
+  Parameters: {"page"=>"17", "genre"=>"113"}
+
+ActiveRecord::StatementInvalid (RuntimeError: ERROR	C42P10	Mfor SELECT DISTINCT, ORDER BY expressions must appear in select list	P160	Fparse_clause.c	L1679	RtransformDistinctClause: select distinct movies.id from movies inner join genres_movies on 
+             movies.id = genres_movies.movie_id where genre_id = 113 
+             order by movies.sort_title LIMIT 12 OFFSET 192):
+  /Users/curtis/.gem/ruby/1.8/gems/mislav-will_paginate-2.3.11/lib/will_paginate/finder.rb:138:in `paginate_by_sql'
+  /Users/curtis/.gem/ruby/1.8/gems/mislav-will_paginate-2.3.11/lib/will_paginate/collection.rb:87:in `create'
+  /Users/curtis/.gem/ruby/1.8/gems/mislav-will_paginate-2.3.11/lib/will_paginate/finder.rb:132:in `paginate_by_sql'
+  app/controllers/movies_controller.rb:10:in `index'
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing ContentTypesController#index (for 127.0.0.1 at 2009-07-28 21:35:21) [GET]
+Rendering template within layouts/movies
+Rendering content_types/index
+Completed in 4ms (View: 4, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing MoviesController#index (for 127.0.0.1 at 2009-07-28 21:35:24) [GET]
+Rendering template within layouts/movies
+Rendering movies/index
+Completed in 173ms (View: 140, DB: 30) | 200 OK [http://localhost/movies]
+
+
+Processing ContentTypesController#index (for 127.0.0.1 at 2009-07-28 21:35:45) [GET]
+Rendering template within layouts/movies
+Rendering content_types/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing Admin::DirectoriesController#index (for 127.0.0.1 at 2009-07-28 21:35:46) [GET]
+Rendering template within layouts/admin
+Rendering list
+Completed in 398ms (View: 295, DB: 3) | 200 OK [http://localhost/admin]
+
+
+Processing Admin::AssetTypesController#index (for 127.0.0.1 at 2009-07-28 21:35:56) [GET]
+Rendering template within layouts/admin
+Rendering list
+Completed in 84ms (View: 77, DB: 3) | 200 OK [http://localhost/admin/asset_types]
+
+
+Processing Admin::DirectoriesController#index (for 127.0.0.1 at 2009-07-28 21:35:58) [GET]
+Rendering template within layouts/admin
+Rendering list
+Completed in 20ms (View: 13, DB: 2) | 200 OK [http://localhost/admin/directories]
+
+
+Processing Admin::MoviesController#index (for 127.0.0.1 at 2009-07-28 21:35:59) [GET]
+Rendering template within layouts/admin
+Rendering list
+Completed in 358ms (View: 282, DB: 4) | 200 OK [http://localhost/admin/movies]
+
+
+Processing Admin::GenresController#index (for 127.0.0.1 at 2009-07-28 21:36:00) [GET]
+Rendering template within layouts/admin
+Rendering list
+Completed in 613ms (View: 192, DB: 286) | 200 OK [http://localhost/admin/genres]
+
+
+Processing Admin::MoviesController#index (for 127.0.0.1 at 2009-07-28 21:36:39) [GET]
+Rendering template within layouts/admin
+Rendering list
+Completed in 107ms (View: 96, DB: 5) | 200 OK [http://localhost/admin/movies]
+
+
+Processing ContentTypesController#index (for 127.0.0.1 at 2009-07-28 21:36:43) [GET]
+Rendering template within layouts/movies
+Rendering content_types/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing MoviesController#index (for 127.0.0.1 at 2009-07-28 21:36:44) [GET]
+Rendering template within layouts/movies
+Rendering movies/index
+Completed in 44ms (View: 18, DB: 23) | 200 OK [http://localhost/movies]
+
+
+Processing ContentTypesController#index (for 127.0.0.1 at 2009-07-28 21:36:58) [GET]
+Rendering template within layouts/movies
+Rendering content_types/index
+Completed in 3ms (View: 3, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing Admin::DirectoriesController#index (for 127.0.0.1 at 2009-07-28 21:36:59) [GET]
+Rendering template within layouts/admin
+Rendering list
+Completed in 20ms (View: 13, DB: 2) | 200 OK [http://localhost/admin]
+
+
+Processing Admin::AssetTypesController#index (for 127.0.0.1 at 2009-07-28 21:37:01) [GET]
+Rendering template within layouts/admin
+Rendering list
+Completed in 29ms (View: 20, DB: 3) | 200 OK [http://localhost/admin/asset_types]
+
+
+Processing Admin::AssetsController#index (for 127.0.0.1 at 2009-07-28 21:37:02) [GET]
+
+ActiveRecord::StatementInvalid (RuntimeError: ERROR	C42883	Moperator does not exist: integer = character varying	HNo operator matches the given name and argument type(s). You might need to add explicit type casts.	P114	Fparse_oper.c	L766	Rop_error: SELECT count(DISTINCT "assets".id) AS count_all FROM "assets"  LEFT OUTER JOIN "directories" ON "directories".id = "assets".directory_id ):
+  
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing Admin::AssetTypesController#show (for 127.0.0.1 at 2009-07-28 21:37:20) [GET]
+  Parameters: {"adapter"=>"_list_inline_adapter", "id"=>"2"}
+Completed in 10ms (View: 2, DB: 0) | 200 OK [http://localhost/admin/asset_types/2?_method=get&adapter=_list_inline_adapter]
+
+
+Processing Admin::AssetTypesController#row (for 127.0.0.1 at 2009-07-28 21:37:21) [GET]
+  Parameters: {"id"=>"2"}
+Completed in 12ms (View: 7, DB: 1) | 200 OK [http://localhost/admin/asset_types/2/row?_method=get]
+
+
+Processing Admin::AssetTypesController#show (for 127.0.0.1 at 2009-07-28 21:37:23) [GET]
+  Parameters: {"adapter"=>"_list_inline_adapter", "id"=>"1"}
+Completed in 9ms (View: 1, DB: 0) | 200 OK [http://localhost/admin/asset_types/1?_method=get&adapter=_list_inline_adapter]
+
+
+Processing Admin::AssetTypesController#row (for 127.0.0.1 at 2009-07-28 21:37:23) [GET]
+  Parameters: {"id"=>"1"}
+Completed in 86ms (View: 4, DB: 3) | 200 OK [http://localhost/admin/asset_types/1/row?_method=get]
+
+
+Processing Admin::DirectoriesController#index (for 127.0.0.1 at 2009-07-28 21:37:25) [GET]
+Rendering template within layouts/admin
+Rendering list
+Completed in 22ms (View: 13, DB: 3) | 200 OK [http://localhost/admin/directories]
+
+
+Processing Admin::MoviesController#index (for 127.0.0.1 at 2009-07-28 21:37:27) [GET]
+Rendering template within layouts/admin
+Rendering list
+Completed in 109ms (View: 98, DB: 6) | 200 OK [http://localhost/admin/movies]
+
+
+Processing Admin::MoviesController#show (for 127.0.0.1 at 2009-07-28 21:37:28) [GET]
+  Parameters: {"adapter"=>"_list_inline_adapter", "id"=>"709"}
+Completed in 77ms (View: 1, DB: 0) | 200 OK [http://localhost/admin/movies/709?_method=get&adapter=_list_inline_adapter]
+
+
+Processing Admin::MoviesController#row (for 127.0.0.1 at 2009-07-28 21:37:29) [GET]
+  Parameters: {"id"=>"709"}
+Completed in 9ms (View: 6, DB: 1) | 200 OK [http://localhost/admin/movies/709/row?_method=get]
+
+
+Processing Admin::MoviesController#show (for 127.0.0.1 at 2009-07-28 21:37:30) [GET]
+  Parameters: {"adapter"=>"_list_inline_adapter", "id"=>"402"}
+Completed in 48ms (View: 1, DB: 0) | 200 OK [http://localhost/admin/movies/402?_method=get&adapter=_list_inline_adapter]
+
+
+Processing Admin::MoviesController#row (for 127.0.0.1 at 2009-07-28 21:37:31) [GET]
+  Parameters: {"id"=>"402"}
+Completed in 10ms (View: 7, DB: 1) | 200 OK [http://localhost/admin/movies/402/row?_method=get]
+
+
+Processing Admin::MoviesController#update_metadata (for 127.0.0.1 at 2009-07-28 21:37:33) [GET]
+  Parameters: {"adapter"=>"_list_inline_adapter", "id"=>"709"}
+Rendering admin/movies/status
+Completed in 1821ms (View: 2, DB: 0) | 200 OK [http://localhost/admin/movies/update_metadata/709?_method=get&adapter=_list_inline_adapter]
+
+
+Processing Admin::MoviesController#row (for 127.0.0.1 at 2009-07-28 21:37:36) [GET]
+  Parameters: {"id"=>"709"}
+Completed in 12ms (View: 7, DB: 1) | 200 OK [http://localhost/admin/movies/709/row?_method=get]
+
+
+Processing Admin::MoviesController#show (for 127.0.0.1 at 2009-07-28 21:37:37) [GET]
+  Parameters: {"adapter"=>"_list_inline_adapter", "id"=>"709"}
+Completed in 20ms (View: 1, DB: 0) | 200 OK [http://localhost/admin/movies/709?_method=get&adapter=_list_inline_adapter]
+
+
+Processing Admin::MoviesController#row (for 127.0.0.1 at 2009-07-28 21:37:39) [GET]
+  Parameters: {"id"=>"709"}
+Completed in 12ms (View: 8, DB: 2) | 200 OK [http://localhost/admin/movies/709/row?_method=get]
+
+
+Processing Admin::MoviesController#show (for 127.0.0.1 at 2009-07-28 21:37:39) [GET]
+  Parameters: {"adapter"=>"_list_inline_adapter", "id"=>"402"}
+Completed in 21ms (View: 1, DB: 0) | 200 OK [http://localhost/admin/movies/402?_method=get&adapter=_list_inline_adapter]
+
+
+Processing Admin::MoviesController#row (for 127.0.0.1 at 2009-07-28 21:37:40) [GET]
+  Parameters: {"id"=>"402"}
+Completed in 12ms (View: 8, DB: 1) | 200 OK [http://localhost/admin/movies/402/row?_method=get]
+
+
+Processing Admin::MoviesController#show (for 127.0.0.1 at 2009-07-28 21:37:41) [GET]
+  Parameters: {"adapter"=>"_list_inline_adapter", "id"=>"713"}
+Completed in 21ms (View: 1, DB: 0) | 200 OK [http://localhost/admin/movies/713?_method=get&adapter=_list_inline_adapter]
+
+
+Processing Admin::MoviesController#row (for 127.0.0.1 at 2009-07-28 21:37:42) [GET]
+  Parameters: {"id"=>"713"}
+Completed in 10ms (View: 6, DB: 1) | 200 OK [http://localhost/admin/movies/713/row?_method=get]
+
+
+Processing Admin::DirectoriesController#index (for 127.0.0.1 at 2009-07-28 21:37:47) [GET]
+Rendering template within layouts/admin
+Rendering list
+Completed in 22ms (View: 15, DB: 2) | 200 OK [http://localhost/admin/directories]
+
+
+Processing Admin::DirectoriesController#scan (for 127.0.0.1 at 2009-07-28 21:37:49) [GET]
+  Parameters: {"adapter"=>"_list_inline_adapter", "id"=>"1"}
+Rendering admin/directories/scan
+Completed in 18931ms (View: 2, DB: 0) | 200 OK [http://localhost/admin/directories/scan/1?_method=get&adapter=_list_inline_adapter]
+
+
+Processing Admin::DirectoriesController#row (for 127.0.0.1 at 2009-07-28 21:38:12) [GET]
+  Parameters: {"id"=>"1"}
+Completed in 12ms (View: 8, DB: 2) | 200 OK [http://localhost/admin/directories/1/row?_method=get]
+
+
+Processing Admin::AssetTypesController#index (for 127.0.0.1 at 2009-07-28 21:38:19) [GET]
+Rendering template within layouts/admin
+Rendering list
+Completed in 29ms (View: 21, DB: 3) | 200 OK [http://localhost/admin/asset_types]
+
+
+Processing Admin::AssetTypesController#index (for 127.0.0.1 at 2009-07-28 21:38:20) [GET]
+Rendering template within layouts/admin
+Rendering list
+Completed in 33ms (View: 23, DB: 5) | 200 OK [http://localhost/admin/asset_types]
+
+
+Processing Admin::GenresController#index (for 127.0.0.1 at 2009-07-28 21:38:21) [GET]
+Rendering template within layouts/admin
+Rendering list
+Completed in 469ms (View: 58, DB: 272) | 200 OK [http://localhost/admin/genres]
