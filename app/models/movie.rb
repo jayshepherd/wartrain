@@ -10,7 +10,7 @@ class Movie < ActiveRecord::Base
   has_and_belongs_to_many :genres
   
   # Callbacks
-  before_create :populate_metadata
+  after_create :populate_metadata
   before_save :populate_sort_title
   after_save :build_playlist
   after_destroy :delete_poster
