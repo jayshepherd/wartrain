@@ -54,7 +54,7 @@ class Movie < ActiveRecord::Base
   def populate_metadata
     require 'imdb'
     require 'json'
-    
+    debugger
     begin
       if imdb_id.nil?
         @imdb_search = Imdb::Search.new(title)
@@ -73,9 +73,9 @@ class Movie < ActiveRecord::Base
           self.genres<<@genre
         end
       end
-    
       # Update poster
       update_poster(nil) if poster == DEFAULT_POSTER
+      self.save!
     rescue
     end
   end
@@ -89,9 +89,9 @@ class Movie < ActiveRecord::Base
   private
   
     def build_playlist
-      sorted_assets = assets.find(:all, :order => "path ASC")
+      sorted_assets = self.assets.find(:all, :order => "path ASC")
       paths = ''
-      assets.each {|a| paths<<a.path}
+      self.assets.each {|a| paths<<a.path}
       if sorted_assets.length > 1 and paths.scan("/VIDEO_TS/").length == 0
         file = File.new(Rails.root.join("public/playlists/movies",id.to_s+".jsp"), "w")
           sorted_assets.each_with_index do |asset, idx|

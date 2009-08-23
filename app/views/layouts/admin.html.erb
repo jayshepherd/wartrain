@@ -11,17 +11,22 @@
 </head>
 <body>
 	
-<%= link_to "Home", "/", {:class => 'admin_menu'} %> *	
+<%= link_to "Home", "/", {:class => 'admin_menu'} %> 	
 <%= link_to "Asset Types", {:controller => "asset_types", :action => "index"}, 
-            {:class => 'admin_menu'} %> * 
+            {:class => 'admin_menu', 
+	         :id => if current_page?(:controller => 'asset_types') : 'selected' end} %> 			   
 <%= link_to "Assets", {:controller => "assets", :action => "index"},
- 			{:class => 'admin_menu'} %> *
+ 			{:class => 'admin_menu',
+	         :id => if current_page?(:controller => 'assets') : 'selected' end} %> 
 <%= link_to "Directories", {:controller => "directories", :action => "index"},
- 			{:class => 'admin_menu'} %> *
+ 			{:class => 'admin_menu',
+	         :id => if current_page?(:controller => 'directories') : 'selected' end} %> 
 <%= link_to "Movies", {:controller => "movies", :action => "index"},
- 			{:class => 'admin_menu'} %> *
+ 			{:class => 'admin_menu',
+	         :id => if current_page?(:controller => 'movies') : 'selected' end} %> 
 <%= link_to "Genres", {:controller => "genres", :action => "index"},
-			{:class => 'admin_menu'} %> *
+			{:class => 'admin_menu',
+			 :id => if current_page?(:controller => 'genres') : 'selected' end} %> 
 
 <%= yield  %>
 

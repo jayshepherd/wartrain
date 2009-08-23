@@ -5,7 +5,7 @@ class Admin::DirectoriesController < ApplicationController
     config.list.columns = [:content_type, :physical_path, :nmt_path]
     config.show.columns = [:content_type, :physical_path, :nmt_path, :asset_types,
                            :digest]
-    config.update.columns = [:content_type, :physical_path, :nmt_path, :asset_types]
+    config.update.columns = [:content_type, :physical_path, :nmt_path, :asset_types, :digest]
     config.action_links.add(:scan, :controller => :directories, :type => :record)
   end
   

@@ -32,7 +32,7 @@ class Directory < ActiveRecord::Base
       assets.each do |asset|
         unless File.exists?(physical_path+'/'+asset.path)
           asset.delete
-          @results[:deleted] = @results[:deleted].next
+          @results[:deleted] = @results[:deleted].next                         
         end
       end
       
@@ -41,7 +41,6 @@ class Directory < ActiveRecord::Base
         unless File.directory?(path)
           asset_types.each do |type|
             unless path.index(Regexp.new(type.regex, Regexp::IGNORECASE)).nil?
-              debugger
               asset = assets.find_or_initialize_by_path(path.gsub(physical_path, ''))
               if asset.new_record? : @results[:added] = @results[:added].next end
               asset.save
