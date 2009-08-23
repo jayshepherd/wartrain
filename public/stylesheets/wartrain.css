@@ -30,7 +30,7 @@ h2 {
 	text-decoration:none;
 }
 
-a.page_links {
+a {
 	color:#F0FFFF;
 	font-family:arial,sans-serif;
 	font-size:20px;
@@ -45,6 +45,14 @@ a.page_links {
 	text-decoration:none;
 }
 
+a#previous {
+	float:left;
+}
+
+a#next {
+	float:right;
+}
+
 table.top_links {
 	margin-left:auto; 
 	margin-right:auto; 
@@ -54,5 +62,9 @@ table.top_links {
 table.bottom_links {
 	margin-left:auto; 
 	margin-right:auto; 
+}
+
+img {
+	padding:10px;
 }
 	

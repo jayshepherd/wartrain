@@ -10,19 +10,14 @@
   	<% @next_page = params[:page].to_i + 1 %>
 <% end %>
 
-<table class="top_links"><tr>
-<td align='left'><% unless @prev_page == 0 %>
-		<%= link_to  "Previous", {:controller => 'movies',
-			         :action => params[:action], :genre => params[:genre], 
-			         :page => @prev_page}, {:class => 'page_links', 
-				     :TVID => 'PGUP'} %>
-	<% end %></td>
-<td align='right'>
-		<%= link_to "Next", {:controller => 'movies', :action => params[:action], 
-                    :genre => params[:genre], :page => @next_page}, {:TVID => 'PGDN', 
-	                :class => 'page_links'} %>
-	</td>
-</tr></table>
+<% unless @prev_page == 0 %>
+	<%= link_to  "Previous", {:controller => 'movies', :action => params[:action], 
+		         :genre => params[:genre], :page => @prev_page}, {:id => 'previous', 
+				 :TVID => 'PGUP'} %>
+<% end %></td>
+
+<%= link_to "Next", {:controller => 'movies', :action => params[:action], 
+	:genre => params[:genre], :page => @next_page}, {:TVID => 'PGDN', :id => 'next'} %>
 
 <table>
 	<% count = 1 %>
