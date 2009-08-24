@@ -30,18 +30,12 @@
 	<% end %>
 </table>
 
-<table class="bottom_links">
-<tr>
-<td><%= link_to "Home", "/", {:class => 'page_links', :TVID => 'HOME'}%></td><td />
-
-<td><%= link_to "All", {:controller => 'movies', :action => 'index'}, 
-                      {:class => 'page_links', :TVID => 'RED'} %></td><td />
-
-<td><%= link_to "Newest", {:controller => 'movies', :action => 'newest'}, 
-                      {:class => 'page_links', :TVID => 'GREEN'} %></td><td />
-<td><%= link_to "Genres", {:controller => 'movies', :action => 'genres'}, 
-                      {:class => 'page_links', :TVID => 'YELLOW'} %></td><td />
-<td><%= link_to "People", {:controller => 'movies', :action => 'people'}, 
-					  {:class => 'page_links', :TVID => 'BLUE'} %></td><td />
-</tr>
-</table>
+<%= link_to "Home", "/", {:class => 'bottom_links', :TVID => 'HOME'}%>
+<%= link_to "All", {:controller => 'movies', :action => 'index'}, 
+                   {:class => 'bottom_links', :TVID => 'RED'} %>
+<%= link_to "Newest", {:controller => 'movies', :action => 'newest'}, 
+                      {:class => 'bottom_links', :TVID => 'GREEN'} %>
+<%= link_to "Genres", {:controller => 'movies', :action => 'genres'}, 
+                      {:class => 'bottom_links', :TVID => 'YELLOW'} %>
+<%= link_to "People", {:controller => 'movies', :action => 'people'}, 
+					  {:class => 'bottom_links', :TVID => 'BLUE'} %>

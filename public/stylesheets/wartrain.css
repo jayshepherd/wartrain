@@ -53,15 +53,8 @@ a#next {
 	float:right;
 }
 
-table.top_links {
-	margin-left:auto; 
-	margin-right:auto; 
-	width:1020px;
-}
-
-table.bottom_links {
-	margin-left:auto; 
-	margin-right:auto; 
+a.bottom_links {
+	padding:0px 50px;
 }
 
 img {

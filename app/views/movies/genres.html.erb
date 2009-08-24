@@ -1,13 +1,5 @@
-<table>
-	<tr>
-		<td><h1><%= link_to 'All', :controller => :movies, :action => :index %></h1></td>
-	</tr>
-	<% count = 2 %>
-	<% @genres.each do |genre| %>
-		<% if count%6 == 0 %><tr><% end %>
-		<td><h1><%= link_to genre.name, :controller => :movies, :action => :index, 
-				:genre => genre.id %></h1></td>
-		<% if count%6 == 1 %></tr><% end %>
-		<% count = count + 1%>
-	<% end %>
-</table>
+<%= link_to 'All', {:controller => :movies, :action => :index}, {:class => 'bottom_links'} %>
+<% @genres.each do |genre| %>
+	<%= link_to genre.name, {:controller => :movies, :action => :index, :genre => genre.id},
+	    {:class => 'bottom_links'} %>
+<% end %>

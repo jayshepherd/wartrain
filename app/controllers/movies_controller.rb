@@ -19,7 +19,7 @@ class MoviesController < ApplicationController
   end
   
   def genres
-    @genres = Genre.find(:all)
+    @genres = Genre.find(:all, :order => 'name ASC')
   end
 
   def show
