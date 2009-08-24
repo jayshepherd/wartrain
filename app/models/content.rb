@@ -5,6 +5,7 @@ class Content < ActiveRecord::Base
   
   # Associations
   has_many :assets, :after_remove => :delete_empty_content
+  has_and_belongs_to_many :genres
   
   # Callbacks
   before_save :populate_sort_title
@@ -22,7 +23,7 @@ class Content < ActiveRecord::Base
       if assets.length == 1
         return assets.first.directory.nmt_path+assets.first.path
       else
-        return '/playlists/'+type.downcase+'/'+id.to_s+'.jsp'
+        return '/playlists/'+id.to_s+'.jsp'
       end
     end
   end
@@ -42,18 +43,17 @@ class Content < ActiveRecord::Base
   end
   
   def poster
-    debugger
-    path = Rails.root.join("public/art/"+type.downcase+"/",id.to_s+'.jpg')
+    path = Rails.root.join("public/art",id.to_s+'.jpg')
     if File.exists?(path)
-       "/art/"+type.downcase+"/"+id.to_s+'.jpg'
+       "/art/"+id.to_s+".jpg"
     else
-       "/art/"+type.downcase+"/"+'default.jpg'
+       "/art/default.jpg"
     end
   end
   
   def update_poster(url)
-    url = google_art(title+' '+type.downcase+' poster') if url.nil?
-    update_art(url, Rails.root.join("public/art/"+type.downcase,id.to_s+'.jpg'))
+    url = google_art(title+' '+type+' poster') if url.nil?
+    update_art(url, Rails.root.join("public/art",id.to_s+'.jpg'))
   end
   
   # Private Instance Methods
@@ -73,7 +73,7 @@ class Content < ActiveRecord::Base
       paths = ''
       self.assets.each {|a| paths<<a.path}
       if sorted_assets.length > 1 and paths.scan("/VIDEO_TS/").length == 0
-        file = File.new(Rails.root.join("public/playlists/"+type.downcase,id.to_s+".jsp"), "w")
+        file = File.new(Rails.root.join("public/playlists",id.to_s+".jsp"), "w")
           sorted_assets.each_with_index do |asset, idx|
             file.puts(title+idx.to_s+"|0|0|"+asset.directory.nmt_path+asset.path+"|")
           end
@@ -82,7 +82,7 @@ class Content < ActiveRecord::Base
     end
     
     def delete_poster
-       path = Rails.root.join("public/art/"+type.downcase,id.to_s+'.jpg')
+       path = Rails.root.join("public/art",id.to_s+'.jpg')
        File.delete(path) if File.exists?(path) 
     end
     

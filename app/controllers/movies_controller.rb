@@ -1,7 +1,11 @@
 class MoviesController < ApplicationController  
+  layout 'wartrain'
+  
   def index
     if params[:genre].nil?
-      @movies = Movie.paginate :page => params[:page], :order => :sort_title, 
+      @movies = Movie.paginate :page => params[:page],
+                               :conditions => ['title like ?', "#{params[:search]}%"],
+                               :order => :sort_title, 
                                :per_page => 12
     else
       sql = "select distinct movies.id from movies inner join genres_movies on 

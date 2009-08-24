@@ -1,8 +1,5 @@
 class Movie < Content
   
-  # Associations
-  has_and_belongs_to_many :genres
-  
   # Callbacks
   after_create :populate_metadata
 

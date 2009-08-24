@@ -1,6 +1,11 @@
 <h2>Movies
     <%= ' - '+@genre.name.titleize unless params[:genre].nil? %>
-</h2><br />
+</h2>
+
+<% form_tag request.path, :method => 'get' do %>
+  <%= text_field_tag :search, params[:search] %><%= submit_tag "Search" %>
+<% end %>
+<br />
 
 <% if params[:page].to_i <= 1 %>
 	<% @prev_page = 0 %>
@@ -14,7 +19,7 @@
 	<%= link_to  "Previous", {:controller => 'movies', :action => params[:action], 
 		         :genre => params[:genre], :page => @prev_page}, {:id => 'previous', 
 				 :TVID => 'PGUP'} %>
-<% end %></td>
+<% end %>
 
 <%= link_to "Next", {:controller => 'movies', :action => params[:action], 
 	:genre => params[:genre], :page => @next_page}, {:TVID => 'PGDN', :id => 'next'} %>
@@ -26,7 +31,7 @@
 		<td><%= link_to image_tag(movie.poster, :border=>0, :size=>'162x246'), 
 				movie.url, html_options = movie.html_options %><br />
 		<% if count%6 == 0 %></tr><% end %>
-		<% count = count + 1%>
+		<% count = count + 1 %>
 	<% end %>
 </table>
 
