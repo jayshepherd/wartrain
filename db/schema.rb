@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090824182717) do
+ActiveRecord::Schema.define(:version => 20090827011727) do
 
   create_table "asset_types", :force => true do |t|
     t.string   "name"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20090824182717) do
     t.datetime "updated_at"
     t.string   "sort_title"
     t.string   "type"
+    t.boolean  "watched",      :default => 0
   end
 
   create_table "contents_genres", :id => false, :force => true do |t|

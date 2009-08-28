@@ -1,5 +1,16 @@
-<%= link_to 'All', {:controller => :movies, :action => :index}, {:class => 'bottom_links'} %>
+<table>
+<tr>
+	
+<td>
+	<%= link_to 'All', {:controller => :movies, :action => :index}, {:class => 'bottom_links'} %>
+<td>
+	
 <% @genres.each do |genre| %>
-	<%= link_to genre.name, {:controller => :movies, :action => :index, :genre => genre.id},
-	    {:class => 'bottom_links'} %>
+	<% count = 1 %>
+	<% if count%5 == 1 %><tr><% end %>
+	<td><%= link_to genre.name, {:controller => :movies, :action => :index, :genre => genre.id},
+	    {:class => 'bottom_links'} %></td>
+	<% if count%5 == 0 %></tr><% end %>
+	<% count = count + 1 %>
 <% end %>
+</table>

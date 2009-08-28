@@ -1,46 +1,76 @@
-<h2>Movies
-    <%= ' - '+@genre.name.titleize unless params[:genre].nil? %>
-</h2>
-
-<% form_tag request.path, :method => 'get' do %>
-  <%= text_field_tag :search, params[:search] %><%= submit_tag "Search" %>
-<% end %>
-<br />
-
+<!-- code for pagination -->
 <% if params[:page].to_i <= 1 %>
 	<% @prev_page = 0 %>
   	<% @next_page = 2 %>
 <% else %>
 	<% @prev_page = params[:page].to_i - 1 %>
-  	<% @next_page = params[:page].to_i + 1 %>
+	<% @next_page = params[:page].to_i + 1 %>
 <% end %>
 
+<h2>Movies
+    <%= ' - '+@genre.name.titleize unless params[:genre].blank? %>
+    <%= ' - Search: '+params[:search] unless params[:search].blank? %>
+</h2>
+
+<p>
+<table>
+<tr>
+<td width="800">
+<% if params[:genre].blank? and controller.action_name == 'index' %>
+	<% form_tag request.path, :method => 'get' do %>
+  		<%= text_field_tag :search, params[:search] %><%= submit_tag "Search" %>
+	<% end %>
+<% end %>
+</td>
+<td width="100" align="left">
 <% unless @prev_page == 0 %>
 	<%= link_to  "Previous", {:controller => 'movies', :action => params[:action], 
-		         :genre => params[:genre], :page => @prev_page}, {:id => 'previous', 
-				 :TVID => 'PGUP'} %>
-<% end %>
+							  :genre => params[:genre], :page => @prev_page}, {:id => 'previous', 
+							  :TVID => 'PGUP'} %>
+	<% end %>
+</td>
 
+<td width="100" align="right">
 <%= link_to "Next", {:controller => 'movies', :action => params[:action], 
-	:genre => params[:genre], :page => @next_page}, {:TVID => 'PGDN', :id => 'next'} %>
+				     :genre => params[:genre], :page => @next_page}, {:TVID => 'PGDN', :id => 'next'} %>
+</td>
+</tr>
+</table>
+</p>
 
-<table>
+<table class="content">
 	<% count = 1 %>
 	<% @movies.each do |movie| %>
 		<% if count%6 == 1 %><tr><% end %>
 		<td><%= link_to image_tag(movie.poster, :border=>0, :size=>'162x246'), 
-				movie.url, html_options = movie.html_options %><br />
+				{:controller => 'movies', :action => 'watch', :id => movie}, 
+				html_options = movie.html_options %><br />
 		<% if count%6 == 0 %></tr><% end %>
 		<% count = count + 1 %>
 	<% end %>
 </table>
 
-<%= link_to "Home", "/", {:class => 'bottom_links', :TVID => 'HOME'}%>
-<%= link_to "All", {:controller => 'movies', :action => 'index'}, 
-                   {:class => 'bottom_links', :TVID => 'RED'} %>
-<%= link_to "Newest", {:controller => 'movies', :action => 'newest'}, 
-                      {:class => 'bottom_links', :TVID => 'GREEN'} %>
-<%= link_to "Genres", {:controller => 'movies', :action => 'genres'}, 
-                      {:class => 'bottom_links', :TVID => 'YELLOW'} %>
-<%= link_to "People", {:controller => 'movies', :action => 'people'}, 
-					  {:class => 'bottom_links', :TVID => 'BLUE'} %>
+<table>
+	<tr>
+		<td width="100" align="left">
+			<%= link_to "Home", "/", {:class => 'bottom_links', :TVID => 'HOME'}%>
+		</td>
+		<td width="100" align="left">
+			<%= link_to "All", {:controller => 'movies', :action => 'index'}, 
+                               {:class => 'bottom_links', :TVID => 'RED'} %>
+		</td>
+		<td width="100" align="left">
+			<%= link_to "Newest", {:controller => 'movies', :action => 'newest'}, 
+                                  {:class => 'bottom_links', :TVID => 'GREEN'} %>
+		</td>
+		<td width="100" align="left">
+			<%= link_to "Genres", {:controller => 'movies', :action => 'genres'}, 
+                                  {:class => 'bottom_links', :TVID => 'YELLOW'} %>
+		</td>
+		<td width="100" align="left">
+			<%= link_to "Unwatched", {:controller => 'movies', :action => 'unwatched'}, 
+					  			  {:class => 'bottom_links', :TVID => 'BLUE'} %>
+		</td>
+	</tr>
+</table>
+

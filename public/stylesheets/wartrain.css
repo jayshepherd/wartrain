@@ -46,18 +46,19 @@ a {
 }
 
 a#previous {
-	float:left;
+	text-align:left;;
 }
 
 a#next {
-	float:right;
+	text-align:right;
 }
 
 a.bottom_links {
-	padding:0px 50px;
+	margin:0px 50px;
 }
 
-img {
-	padding:10px;
+table.content {
+	padding:2px;
 }
+
 	
