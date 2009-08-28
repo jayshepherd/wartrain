@@ -27,7 +27,8 @@ class Movie < Content
         end
       end
       # Update poster
-      update_poster(nil) if poster == DEFAULT_POSTER
+      debugger
+      update_poster(nil) if poster == '/art/default.jpg'
       self.save!
     rescue
     end
