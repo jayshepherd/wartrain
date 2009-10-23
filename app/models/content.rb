@@ -16,12 +16,12 @@ class Content < ActiveRecord::Base
   def url
     paths = ''
     assets.each {|a| paths<<a.path}
-    if paths.scan('/VIDEO_TS/').length > 0 
+    if paths['/VIDEO_TS/']
       return assets.first.directory.nmt_path+
              assets.first.path.gsub(assets.first.path.split('/').last, '').chop
     else
       if assets.length == 1
-        return assets.first.directory.nmt_path+assets.first.path
+        return assets.first.directory.nmt_path+'/'+assets.first.path
       else
         return '/playlists/'+id.to_s+'.jsp'
       end

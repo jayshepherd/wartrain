@@ -38,7 +38,7 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
   end
   
-  def watch
+  def watch 
     debugger
     @movie = Movie.find(params[:id])
     @movie.watched = 1

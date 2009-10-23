@@ -43,8 +43,7 @@
 	<% @movies.each do |movie| %>
 		<% if count%6 == 1 %><tr><% end %>
 		<td><%= link_to image_tag(movie.poster, :border=>0, :size=>'162x246'), 
-				{:controller => 'movies', :action => 'watch', :id => movie}, 
-				html_options = movie.html_options %><br />
+				movie.url, html_options = movie.html_options %><br />
 		<% if count%6 == 0 %></tr><% end %>
 		<% count = count + 1 %>
 	<% end %>
