@@ -22,22 +22,35 @@
 	<% end %>
 <% end %>
 </td>
-<td width="100" align="left">
-<% unless @prev_page == 0 %>
-	<%= link_to  "Previous", {:controller => 'movies', :action => params[:action], 
-							  :genre => params[:genre], :page => @prev_page}, {:id => 'previous', 
-							  :TVID => 'PGUP'} %>
-	<% end %>
-</td>
-
-<td width="100" align="right">
-<%= link_to "Next", {:controller => 'movies', :action => params[:action], 
-				     :genre => params[:genre], :page => @next_page}, {:TVID => 'PGDN', :id => 'next'} %>
-</td>
 </tr>
 </table>
 </p>
 
+<table>
+<tr>
+<td>
+	<table>
+		<tr>
+			<td><%= link_to "Home", "/", {:class => 'bottom_links', :TVID => 'HOME'}%></td>
+		</tr>
+		<tr>
+			<td><%= link_to "All", {:controller => 'movies', :action => 'index'}, 
+	                               {:class => 'bottom_links', :TVID => 'RED'} %>
+	        </td>
+		</tr>
+		<tr>
+			<td><%= link_to "Newest", {:controller => 'movies', :action => 'newest'}, 
+	                                  {:class => 'bottom_links', :TVID => 'GREEN'} %>
+			</td>
+		</tr>
+		<tr>
+			<td><%= link_to "Genres", {:controller => 'movies', :action => 'genres'}, 
+	                                  {:class => 'bottom_links', :TVID => 'YELLOW'} %>
+			</td>
+		</tr>
+	</table>
+</td>
+<td>
 <table class="content">
 	<% count = 1 %>
 	<% @movies.each do |movie| %>
@@ -50,26 +63,17 @@
 </table>
 
 <table>
-	<tr>
-		<td width="100" align="left">
-			<%= link_to "Home", "/", {:class => 'bottom_links', :TVID => 'HOME'}%>
-		</td>
-		<td width="100" align="left">
-			<%= link_to "All", {:controller => 'movies', :action => 'index'}, 
-                               {:class => 'bottom_links', :TVID => 'RED'} %>
-		</td>
-		<td width="100" align="left">
-			<%= link_to "Newest", {:controller => 'movies', :action => 'newest'}, 
-                                  {:class => 'bottom_links', :TVID => 'GREEN'} %>
-		</td>
-		<td width="100" align="left">
-			<%= link_to "Genres", {:controller => 'movies', :action => 'genres'}, 
-                                  {:class => 'bottom_links', :TVID => 'YELLOW'} %>
-		</td>
-		<td width="100" align="left">
-			<%= link_to "Unwatched", {:controller => 'movies', :action => 'unwatched'}, 
-					  			  {:class => 'bottom_links', :TVID => 'BLUE'} %>
-		</td>
-	</tr>
+<tr>
+<td width="100" align="left">
+<% unless @prev_page == 0 %>
+	<%= link_to  "Previous", {:controller => 'movies', :action => params[:action], 
+							  :genre => params[:genre], :page => @prev_page}, {:id => 'previous', 
+							  :TVID => 'PGUP'} %>
+	<% end %>
+</td>
+<td width="100" align="right">
+<%= link_to "Next", {:controller => 'movies', :action => params[:action], 
+				     :genre => params[:genre], :page => @next_page}, {:TVID => 'PGDN', :id => 'next'} %>
+</td>
+</tr>
 </table>
-
