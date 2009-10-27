@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091021050436) do
+ActiveRecord::Schema.define(:version => 20091027042032) do
 
   create_table "asset_types", :force => true do |t|
     t.string   "name"
@@ -25,11 +25,11 @@ ActiveRecord::Schema.define(:version => 20091021050436) do
 
   create_table "assets", :force => true do |t|
     t.string   "path"
-    t.string   "directory_id"
     t.integer  "content_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "asset_type_id"
+    t.integer  "directory_id"
   end
 
   create_table "contents", :force => true do |t|
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20091021050436) do
     t.string   "sort_title"
     t.string   "type"
     t.boolean  "watched"
+    t.integer  "promotion_id"
   end
 
   create_table "contents_genres", :id => false, :force => true do |t|
@@ -61,6 +62,13 @@ ActiveRecord::Schema.define(:version => 20091021050436) do
 
   create_table "genres", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "promotions", :force => true do |t|
+    t.string   "Name"
+    t.string   "Abbreviation"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

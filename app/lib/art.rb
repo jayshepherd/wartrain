@@ -16,7 +16,7 @@ module Art
      results = JSON.parse(json_results)
      image_array = results['responseData']['results']
      image = image_array[0] if image_array
-     return image['unescapedUrl']
+     image == nil ? '' : image['unescapedURL']
    end
     
 private 

@@ -14,21 +14,33 @@
 
 <p>
 <table>
-<tr>
-<td width="800">
-<% if params[:genre].blank? and controller.action_name == 'index' %>
-	<% form_tag request.path, :method => 'get' do %>
-  		<%= text_field_tag :search, params[:search] %><%= submit_tag "Search" %>
-	<% end %>
-<% end %>
-</td>
-</tr>
+	<tr>
+		<td width="900">
+			<% if params[:genre].blank? and controller.action_name == 'index' %>
+				<% form_tag request.path, :method => 'get' do %>
+  				<%= text_field_tag :search, params[:search] %><%= submit_tag "Search" %>
+			<% end %>
+			<% end %>
+		</td>
+		<td width="100" align="left">
+			<% unless @prev_page == 0 %>
+				<%= link_to  "Previous", {:controller => 'movies', :action => params[:action], 
+							  :genre => params[:genre], :page => @prev_page}, {:id => 'previous', 
+							  :TVID => 'PGUP'} %>
+			<% end %>
+		</td>
+		<td width="100" align="right">
+			<%= link_to "Next", {:controller => 'movies', :action => params[:action], 
+				        :genre => params[:genre], :page => @next_page}, 
+				       {:TVID => 'PGDN', :id => 'next'} %>
+		</td>
+	</tr>
 </table>
 </p>
 
 <table>
 <tr>
-<td>
+<td valign='top'>
 	<table>
 		<tr>
 			<td><%= link_to "Home", "/", {:class => 'bottom_links', :TVID => 'HOME'}%></td>
@@ -60,20 +72,4 @@
 		<% if count%6 == 0 %></tr><% end %>
 		<% count = count + 1 %>
 	<% end %>
-</table>
-
-<table>
-<tr>
-<td width="100" align="left">
-<% unless @prev_page == 0 %>
-	<%= link_to  "Previous", {:controller => 'movies', :action => params[:action], 
-							  :genre => params[:genre], :page => @prev_page}, {:id => 'previous', 
-							  :TVID => 'PGUP'} %>
-	<% end %>
-</td>
-<td width="100" align="right">
-<%= link_to "Next", {:controller => 'movies', :action => params[:action], 
-				     :genre => params[:genre], :page => @next_page}, {:TVID => 'PGDN', :id => 'next'} %>
-</td>
-</tr>
 </table>

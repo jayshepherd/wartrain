@@ -17,12 +17,13 @@ an external system with a Rails stack, and add it to the NMT as a Web Service.
 == ROADMAP ==
 
 0.1 - Movies
-0.2 - TV
-0.3 - MMA/Other 
+0.2 - MMA
+0.3 - Sports
 0.4 - Music
 0.5 - Photo
 0.6 - Rails on NMT
 0.7 - Database on NMT
+0.8 - Skinnable interface
 
 * The NMT community commonly refer to replacement user-interfaces to manage 
   media as "jukeboxes".

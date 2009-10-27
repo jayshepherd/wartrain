@@ -24,11 +24,18 @@ class Asset < ActiveRecord::Base
     end 
     
     def create_content
-      if directory.content_type == 'Movies'
+      debugger
+      case directory.content_type
+        when 'Movies'
           title = path.split('/').first.split('(').first
           movie = Movie.find_or_initialize_by_title(:title => title)
             movie.assets<<self
           movie.save
+        when 'MMA Events'
+          title = path.split('/').second
+          mma_event = MmaEvent.find_or_initialize_by_title(:title => title)
+            mma_event.assets<<self
+          mma_event.save
       end
     end
     
