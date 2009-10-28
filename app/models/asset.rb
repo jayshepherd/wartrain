@@ -24,7 +24,6 @@ class Asset < ActiveRecord::Base
     end 
     
     def create_content
-      debugger
       case directory.content_type
         when 'Movies'
           title = path.split('/').first.split('(').first

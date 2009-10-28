@@ -6,7 +6,6 @@ class Movie < Content
   # Public Instance Methods
   def populate_metadata
     require 'imdb'
-    require 'json'
 
     begin
       if imdb_id.nil?
