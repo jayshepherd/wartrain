@@ -9,21 +9,21 @@ module Art
    # http://www.swards.net/2009/04/google-image-search-in-rails-using.html
    def google_art(keywords)
      require 'json'
-     debugger
      url = "http://ajax.googleapis.com/ajax/services/search/images?"
      url<<"sz=large&q=#{CGI.escape(keywords)}&v=1.0&as_filetype=jpg"
      json_results = open(url) {|f| f.read };
      results = JSON.parse(json_results)
      image_array = results['responseData']['results']
      image = image_array[0] if image_array
-     image == nil ? '' : image['unescapedURL']
+     image == nil ? '' : image['unescapedUrl']
    end
     
 private 
 
   def save_url(url, path)
     require 'net/http'
-    begin  
+    begin
+      debugger
       url = url.gsub('http://', '')
       @server = url.split('/').first
       remote_path = url.gsub(@server, '')

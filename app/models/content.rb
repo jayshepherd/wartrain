@@ -52,6 +52,7 @@ class Content < ActiveRecord::Base
   end
   
   def update_poster(url)
+    debugger
     url = google_art(title+' '+type+' poster') if url.blank?
     update_art(url, Rails.root.join("public/art",id.to_s+'.jpg')) unless url.blank?
   end
