@@ -4,6 +4,9 @@ class Directory < ActiveRecord::Base
   has_many :assets
   has_and_belongs_to_many :asset_types
   
+  validates_format_of :physical_path, :with => /[\/]$/i
+  validates_format_of :nmt_path, :with => /[\/]$/i
+  
   # Virtual Attributes
   def to_label # for ActiveScaffold
     physical_path
@@ -30,7 +33,7 @@ class Directory < ActiveRecord::Base
       
       # Delete old assets
       assets.each do |asset|
-        unless File.exists?(physical_path+'/'+asset.path)
+        unless File.exists?(physical_path+asset.path)
           asset.delete
           @results[:deleted] = @results[:deleted].next                         
         end

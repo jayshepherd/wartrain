@@ -21,7 +21,7 @@ class Content < ActiveRecord::Base
              assets.first.path.gsub(assets.first.path.split('/').last, '').chop
     else
       if assets.length == 1
-        return assets.first.directory.nmt_path+'/'+assets.first.path
+        return assets.first.directory.nmt_path+assets.first.path
       else
         return '/playlists/'+id.to_s+'.jsp'
       end

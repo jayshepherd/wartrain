@@ -67,8 +67,8 @@ ActiveRecord::Schema.define(:version => 20091027042032) do
   end
 
   create_table "promotions", :force => true do |t|
-    t.string   "Name"
-    t.string   "Abbreviation"
+    t.string   "name"
+    t.string   "abbreviation"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
