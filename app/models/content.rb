@@ -10,7 +10,7 @@ class Content < ActiveRecord::Base
   # Callbacks
   before_save :populate_sort_title
   after_save :build_playlist
-  after_destroy :delete_poster
+  after_destroy :delete_files
   
   # Virtual Attributes
   def url
@@ -39,7 +39,6 @@ class Content < ActiveRecord::Base
     else   
       @html_options = (assets.length == 1 ? {:vod => ""} : {:vod => "playlist"})
     end
-    return @html_options
   end
   
   def poster
@@ -49,12 +48,6 @@ class Content < ActiveRecord::Base
     else
        "/art/default.jpg"
     end
-  end
-  
-  def update_poster(url)
-    debugger
-    url = google_art(title+' '+type+' poster') if url.blank?
-    update_art(url, Rails.root.join("public/art",id.to_s+'.jpg')) unless url.blank?
   end
   
   # Private Instance Methods
@@ -82,9 +75,11 @@ class Content < ActiveRecord::Base
       end
     end
     
-    def delete_poster
+    def delete_files
        path = Rails.root.join("public/art",id.to_s+'.jpg')
        File.delete(path) if File.exists?(path) 
+       path = Rails.root.join("public/playlists",id.to_s+".jsp")
+       File.delete(path) if File.exists?(path)
     end
     
     def delete_empty_content

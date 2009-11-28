@@ -1,23 +1,12 @@
 module Art
   
-   def update_art(url, path)
+   def update_art(url, id)
+     debugger
+     path = Rails.root.join("public/art",id.to_s+'.jpg')
      unless url.nil? : save_url(url, path) end
      if File.exists?(path) : resize(path) end
    end
 
-   # Based on
-   # http://www.swards.net/2009/04/google-image-search-in-rails-using.html
-   def google_art(keywords)
-     require 'json'
-     url = "http://ajax.googleapis.com/ajax/services/search/images?"
-     url<<"sz=large&q=#{CGI.escape(keywords)}&v=1.0&as_filetype=jpg"
-     json_results = open(url) {|f| f.read };
-     results = JSON.parse(json_results)
-     image_array = results['responseData']['results']
-     image = image_array[0] if image_array
-     image == nil ? '' : image['unescapedUrl']
-   end
-    
 private 
 
   def save_url(url, path)

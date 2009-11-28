@@ -1,7 +1,7 @@
 # Be sure to restart your server when you modify this file
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.3.4' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -39,11 +39,8 @@ Rails::Initializer.run do |config|
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
   
-  config.gem 'mislav-will_paginate', :version => '~> 2.3.8', :lib => 'will_paginate', 
-             :source => 'http://gems.github.com'
+  config.gem 'will_paginate', :version => '~> 2.3.8'
   config.gem 'mini_magick', :version => '~> 1.2.5'
   config.gem 'json', :version => '~> 1.1.7'
-  #config.gem 'javan-whenever', :version => '~> 0.3.6', :lib => 'whenever'
-  config.gem 'cschiewek-imdb', :version => '~> 0.5.1', :lib => 'imdb', 
-             :source => 'http://gems.github.com'
+  config.gem 'tmdb_party', :version => '~> 0.4.1'
 end

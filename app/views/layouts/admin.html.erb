@@ -27,12 +27,12 @@
 <%= link_to "Genres", {:controller => "genres", :action => "index"},
 			{:class => 'admin_menu',
 			 :id => if current_page?(:controller => 'genres') : 'selected' end} %>
-<%= link_to "MMA", {:controller => "mma_events", :action => "index"},
+<!-- <%= link_to "MMA", {:controller => "mma_events", :action => "index"},
 			{:class => 'admin_menu',
 			:id => if current_page?(:controller => 'mma_events') : 'selected' end} %>
 <%= link_to "Promotions", {:controller => "promotions", :action => "index"},
 			{:class => 'admin_menu',
-			 :id => if current_page?(:controller => 'promotions') : 'selected' end} %>
+			 :id => if current_page?(:controller => 'promotions') : 'selected' end} %> -->
 
 <%= yield  %>
 

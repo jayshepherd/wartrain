@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091027042032) do
+ActiveRecord::Schema.define(:version => 20091128075112) do
 
   create_table "asset_types", :force => true do |t|
     t.string   "name"
@@ -35,13 +35,13 @@ ActiveRecord::Schema.define(:version => 20091027042032) do
   create_table "contents", :force => true do |t|
     t.string   "title"
     t.date     "release_date"
-    t.string   "imdb_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "sort_title"
     t.string   "type"
     t.boolean  "watched"
     t.integer  "promotion_id"
+    t.integer  "tmdb_id"
   end
 
   create_table "contents_genres", :id => false, :force => true do |t|
@@ -62,6 +62,14 @@ ActiveRecord::Schema.define(:version => 20091027042032) do
 
   create_table "genres", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "movies", :force => true do |t|
+    t.string   "title"
+    t.date     "release_date"
+    t.string   "imdb_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
