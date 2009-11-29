@@ -29,6 +29,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # Sample resource route within a namespace:
      map.namespace :admin do |admin|
+       #admin.resources :content_types, :active_scaffold => true
        admin.resources :directories, :active_scaffold => true, 
                        :collection => {:scan_all => :get}
        admin.resources :assets, :active_scaffold => true

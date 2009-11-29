@@ -24,7 +24,7 @@ class Asset < ActiveRecord::Base
     end 
     
     def create_content
-      case directory.content_type
+      case directory.content_type.name
         when 'Movies'
           title = path.split('/').first.split('(').first
           movie = Movie.find_or_initialize_by_title(:title => title)

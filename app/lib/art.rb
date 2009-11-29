@@ -1,15 +1,15 @@
 module Art
-  
-   def update_art(url, id)
+   
+   def self.update_art(url, id, type)
      debugger
-     path = Rails.root.join("public/art",id.to_s+'.jpg')
-     unless url.nil? : save_url(url, path) end
-     if File.exists?(path) : resize(path) end
+     path = Rails.root.join("public/art/"+type.to_s.pluralize,id.to_s+'.jpg')
+     save_url(url, path) unless url.nil? 
+     resize(path) if File.exists?(path)
    end
 
 private 
 
-  def save_url(url, path)
+  def self.save_url(url, path)
     require 'net/http'
     begin
       debugger
@@ -28,7 +28,7 @@ private
     end
   end
   
-  def resize(path)
+  def self.resize(path)
     require 'rubygems'
     require 'mini_magick'
     begin

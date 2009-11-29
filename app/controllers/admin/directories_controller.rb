@@ -5,8 +5,11 @@ class Admin::DirectoriesController < ApplicationController
     config.list.columns = [:content_type, :physical_path, :nmt_path]
     config.show.columns = [:content_type, :physical_path, :nmt_path, :asset_types,
                            :digest]
+    config.create.columns = [:content_type, :physical_path, :nmt_path, :asset_types]
     config.update.columns = [:content_type, :physical_path, :nmt_path, :asset_types, :digest]
     config.action_links.add(:scan, :controller => :directories, :type => :record)
+    config.columns[:asset_types].form_ui = :select
+    config.columns[:content_type].form_ui = :select
   end
   
   def self.scan_all

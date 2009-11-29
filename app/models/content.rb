@@ -1,8 +1,5 @@
 class Content < ActiveRecord::Base
-  # Includes and contants
-  require 'lib/art'
-  include Art
-  
+ 
   # Associations
   has_many :assets, :after_remove => :delete_empty_content
   has_and_belongs_to_many :genres
@@ -42,11 +39,11 @@ class Content < ActiveRecord::Base
   end
   
   def poster
-    path = Rails.root.join("public/art",id.to_s+'.jpg')
+    path = Rails.root.join("public/art/posters",id.to_s+'.jpg')
     if File.exists?(path)
-       "/art/"+id.to_s+".jpg"
+       "/art/posters/"+id.to_s+".jpg"
     else
-       "/art/default.jpg"
+       "/art/posters/default.jpg"
     end
   end
   
@@ -76,7 +73,7 @@ class Content < ActiveRecord::Base
     end
     
     def delete_files
-       path = Rails.root.join("public/art",id.to_s+'.jpg')
+       path = Rails.root.join("public/art/posters",id.to_s+'.jpg')
        File.delete(path) if File.exists?(path) 
        path = Rails.root.join("public/playlists",id.to_s+".jsp")
        File.delete(path) if File.exists?(path)

@@ -43,4 +43,5 @@ Rails::Initializer.run do |config|
   config.gem 'mini_magick', :version => '~> 1.2.5'
   config.gem 'json', :version => '~> 1.1.7'
   config.gem 'tmdb_party', :version => '~> 0.4.1'
+  
 end

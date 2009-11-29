@@ -7,16 +7,17 @@ class Movie < Content
   # Public Instance Methods
   def populate_metadata
     require 'tmdb_party'
-    tmdb = TMDBParty::Base.new(KEY)
+    require 'imdb'
     
-    if tmdb_id.nil?
-      results = tmdb.search(title)
-      self.tmdb_id = results.first.id unless results.empty?
+    if imdb_id.nil?
+      @imdb_search = Imdb::Search.new(title)
+      self.imdb_id = @imdb_search.movies.first.id unless @imdb_search.movies.empty?
     end
     
-    unless tmdb_id.nil?
+    unless imdb_id.nil?
+      tmdb = TMDBParty::Base.new(KEY)
       begin
-        tmdb_movie = tmdb.get_info(tmdb_id)
+        tmdb_movie = tmdb.imdb_lookup('tt'+imdb_id)
       rescue
       end
       
@@ -33,24 +34,25 @@ class Movie < Content
         end
     
         # Update poster
-        debugger
-        update_poster(nil) if poster == '/art/default.jpg'
+        update_poster(nil) if poster == '/art/posters/default.jpg'
       end
     end
     self.save
   end
   
   def update_poster(url)
-    debugger
     require 'tmdb_party'
     require 'lib/art'
     
     if url.blank?
       tmdb = TMDBParty::Base.new(KEY)
-      tmdb_movie = tmdb.get_info(tmdb_id)
+      begin
+        tmdb_movie = tmdb.imdb_lookup('tt'+imdb_id)
+      rescue
+      end
       url = tmdb_movie.posters.first["cover"] unless tmdb_movie.posters.empty?
     end
-    update_art(url, self.id) unless url.blank?
+    Art.update_art(url, self.id, :poster) unless url.blank?
   end
     
 end
