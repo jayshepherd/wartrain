@@ -26,22 +26,22 @@ class Content < ActiveRecord::Base
   end
   
   def html_options
-    @html_options = Hash.new
+    @html_options = {:onfocussrc = movie.poster.gsub('.jpg', 'm.jpg')}
     paths = ''
     assets.each {|a| paths<<a.path}
     
     if (paths.upcase.scan('/VIDEO_TS/').length > 0) or (paths.upcase.scan(".ISO").length > 0)
       # TVID="Play" name="Play" zcd="2" vod=""
-      @html_options = {:vod => "", :zcd => "2"}
+      @html_options.merge({:vod => "", :zcd => "2"})
     else   
-      @html_options = (assets.length == 1 ? {:vod => ""} : {:vod => "playlist"})
+      @html_options.merge(assets.length == 1 ? {:vod => ""} : {:vod => "playlist"})
     end
   end
   
   def poster
-    path = Rails.root.join("public/art/posters",id.to_s+'l.jpg')
+    path = Rails.root.join("public/art/posters",id.to_s+'.jpg')
     if File.exists?(path)
-       "/art/posters/"+id.to_s+"l.jpg"
+       "/art/posters/"+id.to_s+".jpg"
     else
        "/art/posters/default.jpg"
     end
