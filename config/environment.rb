@@ -40,7 +40,7 @@ Rails::Initializer.run do |config|
   # config.i18n.default_locale = :de
   
   config.gem 'will_paginate', :version => '~> 2.3.8'
-  config.gem 'mini_magick', :version => '~> 1.2.5'
+  config.gem 'rmagick', :version => '~> 2'
   config.gem 'json', :version => '~> 1.1.7'
   config.gem 'tmdb_party', :version => '~> 0.4.1'
   config.gem 'imdb', :verson => '~> 0.5.1'

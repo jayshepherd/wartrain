@@ -27,16 +27,26 @@ private
   end
   
   def self.resize(path)
-    require 'rubygems'
-    require 'mini_magick'
-    image = MiniMagick::Image.from_file(path)
-    image.write(path.to_s)
-    image.resize '270x410' 
-    image.write(path.to_s.gsub('.jpg','l.jpg'))
-    image.resize '192x298'
-    image.write(path.to_s.gsub('.jpg','m.jpg'))
-    image.resize '178x271'
-    image.write(path.to_s.gsub('.jpg','s.jpg'))
+    debugger
+    require 'RMagick'
+    include Magick
+    
+    img = Magick::Image.read(path).first
+    thumb = img.resize_to_fit(270, 410)
+    thumb.write path.to_s.gsub('.jpg','l.jpg')
+    
+    img = Magick::Image.read(path).first
+    thumb = img.resize_to_fit(192, 298)
+    thumb.write path.to_s.gsub('.jpg','m.jpg')
+    
+    img = Magick::Image.read(path).first
+    thumb = img.resize_to_fit(178, 271)
+    thumb.write path.to_s.gsub('.jpg','s.jpg')
+    
+    img = Magick::Image.read(Rails.root.to_s+'/public/art/posters/blank.png').first
+    overlay = Magick::Image.read(path.to_s.gsub('.jpg','s.jpg')).first
+    img.composite!(overlay, CenterGravity, MultiplyCompositeOp)
+    img.write(path.to_s.gsub('.jpg','s.jpg'))
   end
   
 end
