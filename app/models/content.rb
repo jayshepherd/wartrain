@@ -40,11 +40,11 @@ class Content < ActiveRecord::Base
   end
   
   def poster
-    path = Rails.root.join("public/art/posters",id.to_s+'.jpg')
+    path = Rails.root.join("public/art/posters",id.to_s+' .png')
     if File.exists?(path)
-       "/art/posters/"+id.to_s+".jpg"
+       "/art/posters/"+id.to_s+" .png"
     else
-       "/art/posters/default.jpg"
+       "/art/posters/default .png"
     end
   end
   
@@ -74,7 +74,7 @@ class Content < ActiveRecord::Base
     end
     
     def delete_files
-       path = Rails.root.join("public/art/posters",id.to_s+'.jpg')
+       path = Rails.root.join("public/art/posters",id.to_s+' .png')
        File.delete(path) if File.exists?(path) 
        path = Rails.root.join("public/playlists",id.to_s+".jsp")
        File.delete(path) if File.exists?(path)

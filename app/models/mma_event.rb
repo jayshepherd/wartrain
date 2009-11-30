@@ -12,7 +12,7 @@ class MmaEvent < Content
       promotion = Promotion.find_by_name(assets.first.path.split('/').first) unless promotion
       
       # Update poster
-      update_poster(nil) if poster == '/art/default.jpg'
+      update_poster(nil) if poster == '/art/default .png'
       self.save!
     rescue
     end

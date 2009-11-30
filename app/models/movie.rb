@@ -34,7 +34,7 @@ class Movie < Content
         end
     
         # Update poster
-        update_poster(nil) if poster == '/art/posters/default.jpg'
+        update_poster(nil) if poster == '/art/posters/default .png'
       end
     end
     self.save
