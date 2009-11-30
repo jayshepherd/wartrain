@@ -26,7 +26,8 @@ class Content < ActiveRecord::Base
   end
   
   def html_options
-    @html_options = {:onfocussrc = movie.poster.gsub('.jpg', 'm.jpg')}
+    debugger
+    @html_options = Hash.new
     paths = ''
     assets.each {|a| paths<<a.path}
     

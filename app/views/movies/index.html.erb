@@ -67,8 +67,8 @@
 	<% count = 1 %>
 	<% @movies.each do |movie| %>
 		<% if count%6 == 1 %><tr><% end %>
-		<td><%= link_to image_tag(movie.poster.gsub('.jpg','s.jpg'), :border => 0), 
-				movie.url, html_options = movie.html_options %><br />
+		<td><%= link_to image_tag(movie.poster, :border=>0, :onfocussrc => movie.poster.gsub('.jpg', 'm.jpg')),
+			movie.url, html_options = movie.html_options %><br />
 		<% if count%6 == 0 %></tr><% end %>
 		<% count = count + 1 %>
 	<% end %>
