@@ -1,3 +1,7 @@
 <div class='admin_status'>
-	<%= 'Successfully updated '+@movie.title %>
+	<% if @movies.nil? then %>
+		<%= "Successfully updated #{@movie.title}" %>
+	<% else %>
+		<%= "Successfully updated #{@movies.count} movies" %>
+	<% end %>
 </div>

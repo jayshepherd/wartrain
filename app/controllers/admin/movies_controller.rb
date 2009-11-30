@@ -17,7 +17,7 @@ class Admin::MoviesController < ApplicationController
     @movie = Movie.find_by_id(params[:id])
     @movie.populate_metadata
     @movie.save!
-    render(:template => 'admin/movies/status', :layout => false) 
+    render :template => 'admin/movies/status', :layout => false
   end
   
   def update_all_metadata
@@ -31,7 +31,7 @@ class Admin::MoviesController < ApplicationController
         nil
       end
     end
-    render :nothing => true
+    render :template => 'admin/movies/status', :layout => false
   end
   
   def update_poster

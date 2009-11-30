@@ -1,4 +1,4 @@
-def dbg; require "ruby-debug"; debugger; end;
+def dbg; require "ruby-debug"; ; end;
 
 require File.join(File.dirname(__FILE__), '../test_helper.rb')
 

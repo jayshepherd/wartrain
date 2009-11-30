@@ -39,9 +39,9 @@ class Content < ActiveRecord::Base
   end
   
   def poster
-    path = Rails.root.join("public/art/posters",id.to_s+'.jpg')
+    path = Rails.root.join("public/art/posters",id.to_s+'l.jpg')
     if File.exists?(path)
-       "/art/posters/"+id.to_s+".jpg"
+       "/art/posters/"+id.to_s+"l.jpg"
     else
        "/art/posters/default.jpg"
     end
