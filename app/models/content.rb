@@ -39,13 +39,12 @@ class Content < ActiveRecord::Base
     end
   end
   
-  def poster
-    path = Rails.root.join("public/art/posters",id.to_s+' .png')
-    if File.exists?(path)
-       "/art/posters/"+id.to_s+" .png"
-    else
-       "/art/posters/default .png"
-    end
+  def posters
+    @posters = {
+      :main => "/art/posters/"+id.to_s+".jpg",
+      :small => "/art/posters/"+id.to_s+"s.jpg",
+      :medium => "/art/posters/"+id.to_s+"m.jpg"
+    }
   end
   
   # Private Instance Methods
@@ -65,7 +64,7 @@ class Content < ActiveRecord::Base
       paths = ''
       self.assets.each {|a| paths<<a.path}
       if sorted_assets.length > 1 and paths.scan("/VIDEO_TS/").length == 0
-        file = File.new(Rails.root.join("public/playlists",id.to_s+".jsp"), "w")
+        file = File.new("#{RAILS_ROOT}/public/playlists/#{id.to_s}.jsp", "w")
           sorted_assets.each_with_index do |asset, idx|
             file.puts(title+idx.to_s+"|0|0|"+asset.directory.nmt_path+asset.path+"|")
           end
@@ -74,9 +73,9 @@ class Content < ActiveRecord::Base
     end
     
     def delete_files
-       path = Rails.root.join("public/art/posters",id.to_s+' .png')
+       path = "#{RAILS_ROOT}/public/art/posters/#{id.to_s}*.jpg"
        File.delete(path) if File.exists?(path) 
-       path = Rails.root.join("public/playlists",id.to_s+".jsp")
+       path = "#{RAILS_ROOT}/public/playlists/#{id.to_s}.jsp"
        File.delete(path) if File.exists?(path)
     end
     

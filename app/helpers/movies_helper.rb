@@ -4,8 +4,8 @@ module MoviesHelper
   end
   
   def poster_column(record)
-    unless @record.poster.nil?
-  	  image_tag(@record.poster.to_s, :size => '135x205')
+    unless @record.posters[:medium].nil?
+  	  image_tag(@record.posters[:medium], :size => '135x205')
     end
   end
 end

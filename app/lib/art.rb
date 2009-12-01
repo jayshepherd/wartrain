@@ -1,9 +1,11 @@
 module Art
    
-   def self.update_art(url, id, type)   
-     path = Rails.root.join("public/art/"+type.to_s.pluralize,id.to_s+' .png')
+   def self.update_art(content, url)   
+     debugger
+     
+     path = "#{RAILS_ROOT}/public"+content.posters[:main]
      save_url(url, path) unless url.nil? 
-     resize(path) if File.exists?(path)
+     resize(content.posters) if File.exists?(path)
    end
 
 private 
@@ -26,27 +28,26 @@ private
     end
   end
   
-  def self.resize(path)
+  def self.resize(posters)
     debugger
     require 'RMagick'
     include Magick
     
-    img = Magick::Image.read(path).first
-    thumb = img.resize_to_fit(270, 410)
-    thumb.write path.to_s.gsub(' .png','l .png')
+    img = Magick::Image.read("#{RAILS_ROOT}/public"+posters[:main]).first
     
-    img = Magick::Image.read(path).first
-    thumb = img.resize_to_fit(192, 298)
-    thumb.write path.to_s.gsub(' .png','m .png')
+    thumb = img.resize_to_fit(300, 450)
+    thumb.write "#{RAILS_ROOT}/public"+posters[:main]
     
-    img = Magick::Image.read(path).first
-    thumb = img.resize_to_fit(178, 271)
-    thumb.write path.to_s.gsub(' .png','s .png')
+    thumb = img.resize_to_fit(110, 165)
+    thumb.write "#{RAILS_ROOT}/public"+posters[:medium]
     
-    img = Magick::Image.read(Rails.root.to_s+'/public/art/posters/blank.png').first
-    overlay = Magick::Image.read(path.to_s.gsub(' .png','s .png')).first
+    thumb = img.resize_to_fit(100, 150)
+    thumb.write "#{RAILS_ROOT}/public"+posters[:small]
+    
+    img = Magick::Image.read("#{RAILS_ROOT}/public/art/posters/blank.png").first
+    overlay = Magick::Image.read(posters[:small]).first
     img.composite!(overlay, CenterGravity, MultiplyCompositeOp)
-    img.write(path.to_s.gsub(' .png','s .png'))
+    img.write "#{RAILS_ROOT}/public"+posters[:small]
   end
   
 end

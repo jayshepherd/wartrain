@@ -34,7 +34,7 @@ class Movie < Content
         end
     
         # Update poster
-        update_poster(nil) if poster == '/art/posters/default .png'
+        update_poster(nil) unless File.exists?("#{RAILS_ROOT}/public/art/posters/#{posters[:main]}")
       end
     end
     self.save
@@ -52,7 +52,7 @@ class Movie < Content
       end
       url = tmdb_movie.posters.first["cover"] unless tmdb_movie.posters.empty?
     end
-    Art.update_art(url, self.id, :poster) unless url.blank?
+    Art.update_art(self, url) unless url.blank?
   end
     
 end
