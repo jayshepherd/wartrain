@@ -1,8 +1,6 @@
 module Art
    
    def self.update_art(content, url)   
-     debugger
-     
      path = "#{RAILS_ROOT}/public"+content.posters[:main]
      save_url(url, path) unless url.nil? 
      resize(content.posters) if File.exists?(path)
@@ -29,7 +27,6 @@ private
   end
   
   def self.resize(posters)
-    debugger
     require 'RMagick'
     include Magick
     
@@ -45,7 +42,7 @@ private
     thumb.write "#{RAILS_ROOT}/public"+posters[:small]
     
     img = Magick::Image.read("#{RAILS_ROOT}/public/art/posters/blank.png").first
-    overlay = Magick::Image.read(posters[:small]).first
+    overlay = Magick::Image.read("#{RAILS_ROOT}/public"+posters[:small]).first
     img.composite!(overlay, CenterGravity, MultiplyCompositeOp)
     img.write "#{RAILS_ROOT}/public"+posters[:small]
   end
