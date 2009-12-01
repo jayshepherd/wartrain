@@ -11,8 +11,10 @@ class Movie < Content
     
     if imdb_id.nil?
       @imdb_search = Imdb::Search.new(title)
-      unless @imdb_search.movies.empty? or @imdb_search.nil?
-        self.imdb_id = @imdb_search.movies.first.id
+      begin
+        self.imdb_id = @imdb_search.movies.first.id unless @imdb_search.movies.empty?
+      rescue
+        nil
       end
     end
     
