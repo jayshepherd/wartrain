@@ -30,21 +30,25 @@ private
     require 'RMagick'
     include Magick
     
-    img = Magick::Image.read("#{RAILS_ROOT}/public"+posters[:main]).first
+    begin
+      img = Magick::Image.read("#{RAILS_ROOT}/public"+posters[:main]).first
     
-    thumb = img.resize_to_fit(300, 450)
-    thumb.write "#{RAILS_ROOT}/public"+posters[:main]
+      thumb = img.resize_to_fit(300, 450)
+      thumb.write "#{RAILS_ROOT}/public"+posters[:main]
     
-    thumb = img.resize_to_fit(165, 248)
-    thumb.write "#{RAILS_ROOT}/public"+posters[:medium]
+      thumb = img.resize_to_fit(165, 248)
+      thumb.write "#{RAILS_ROOT}/public"+posters[:medium]
     
-    thumb = img.resize_to_fit(150, 225)
-    thumb.write "#{RAILS_ROOT}/public"+posters[:small]
+      thumb = img.resize_to_fit(150, 225)
+      thumb.write "#{RAILS_ROOT}/public"+posters[:small]
     
-    img = Magick::Image.read("#{RAILS_ROOT}/public/art/posters/blank.png").first
-    overlay = Magick::Image.read("#{RAILS_ROOT}/public"+posters[:small]).first
-    img.composite!(overlay, CenterGravity, MultiplyCompositeOp)
-    img.write "#{RAILS_ROOT}/public"+posters[:small]
+      img = Magick::Image.read("#{RAILS_ROOT}/public/art/posters/blank.png").first
+      overlay = Magick::Image.read("#{RAILS_ROOT}/public"+posters[:small]).first
+      img.composite!(overlay, CenterGravity, MultiplyCompositeOp)
+      img.write "#{RAILS_ROOT}/public"+posters[:small]
+    rescue
+      nil
+    end
   end
   
 end
