@@ -35,10 +35,10 @@ private
     thumb = img.resize_to_fit(300, 450)
     thumb.write "#{RAILS_ROOT}/public"+posters[:main]
     
-    thumb = img.resize_to_fit(110, 165)
+    thumb = img.resize_to_fit(165, 248)
     thumb.write "#{RAILS_ROOT}/public"+posters[:medium]
     
-    thumb = img.resize_to_fit(100, 150)
+    thumb = img.resize_to_fit(150, 225)
     thumb.write "#{RAILS_ROOT}/public"+posters[:small]
     
     img = Magick::Image.read("#{RAILS_ROOT}/public/art/posters/blank.png").first
