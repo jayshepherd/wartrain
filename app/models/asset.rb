@@ -30,11 +30,6 @@ class Asset < ActiveRecord::Base
           movie = Movie.find_or_initialize_by_title(:title => title)
             movie.assets<<self
           movie.save
-        when 'MMA Events'
-          title = path.split('/').second
-          mma_event = MmaEvent.find_or_initialize_by_title(:title => title)
-            mma_event.assets<<self
-          mma_event.save
       end
     end
     
