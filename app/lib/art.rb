@@ -1,9 +1,18 @@
 module Art
    
-   def self.update_art(content, url)   
-     path = "#{RAILS_ROOT}/public"+content.posters[:main]
+   def self.update_art(content, url, type)
+     path = "#{RAILS_ROOT}/public"
+     case type
+       when :poster 
+         path += content.posters[:main]
+       when 
+         path += content.background
+     end
      save_url(url, path) unless url.nil? 
-     resize(content.posters) if File.exists?(path)
+     case type
+       when :poster 
+         resize(content.posters) if File.exists?(path)
+     end
    end
 
 private 

@@ -69,8 +69,7 @@
 		<% if count%6 == 1 %><tr><% end %>
 		<td background='<%= movie.posters[:small] %>'>
 			<%= link_to image_tag('/art/posters/blank.png', :border => 0,  
-			    :onfocussrc => movie.posters[:medium]), movie.url, 
-			    html_options = movie.html_options %><br /></td>
+			    :onfocussrc => movie.posters[:medium]), :action => :show, :id => movie.id %></td>
 		<% if count%6 == 0 %></tr><% end %>
 		<% count = count + 1 %>
 	<% end %>

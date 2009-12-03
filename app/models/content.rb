@@ -47,6 +47,10 @@ class Content < ActiveRecord::Base
     }
   end
   
+  def background
+    background = "/art/backgrounds/"+id.to_s+".jpg"
+  end
+  
   # Private Instance Methods
   private
   

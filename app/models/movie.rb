@@ -37,8 +37,9 @@ class Movie < Content
           self.genres<<@genre
         end
     
-        # Update poster
+        # Update art
         update_poster(nil) unless File.exists?("#{RAILS_ROOT}/public/art/posters/#{posters[:main]}")
+        update_background(nil) unless File.exists?("#{RAILS_ROOT}/public/art/backgrounds/#{background}")
       end
     end
     self.save
@@ -56,7 +57,23 @@ class Movie < Content
       end
       url = tmdb_movie.posters.first["cover"] unless tmdb_movie.posters.empty?
     end
-    Art.update_art(self, url) unless url.blank?
+    Art.update_art(self, url, :poster) unless url.blank?
   end
+  
+  def update_background(url)
+    require 'tmdb_party'
+    require 'lib/art'
     
+    if url.blank?
+      tmdb = TMDBParty::Base.new(KEY)
+      begin
+        tmdb_movie = tmdb.imdb_lookup('tt'+imdb_id)
+      rescue
+      end
+      debugger
+      url = tmdb_movie.backdrops.first["original"] unless tmdb_movie.backdrops.empty?
+    end
+    Art.update_art(self, url, :background) unless url.blank?
+  end
+  
 end

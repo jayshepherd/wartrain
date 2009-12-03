@@ -57,4 +57,8 @@ class Directory < ActiveRecord::Base
     return @results
   end
   
+  def self.scan_all
+    @directories = Directory.find(all)
+    @directories.each { |dir| dir.scan }
+  end
 end
