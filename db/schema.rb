@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091202030511) do
+ActiveRecord::Schema.define(:version => 20091204052501) do
 
   create_table "asset_types", :force => true do |t|
     t.string   "name"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20091202030511) do
     t.boolean  "watched"
     t.integer  "promotion_id"
     t.string   "imdb_id"
+    t.string   "trailer"
   end
 
   create_table "contents_genres", :id => false, :force => true do |t|

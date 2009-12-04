@@ -1,5 +1,6 @@
 <div style="background-image:url('<%= @movie.background %>'); background-size: 100%; 
 	        background-repeat:no-repeat; width:1920px; height:1080px;">
 <h2><%= @movie.title %></h2>
-<%= link_to "Play", @movie.url, html_options = @movie.html_options %>
+<%= link_to "Watch Trailer", @movie.trailer.to_s unless @movie.trailer.empty? %><br />
+<%= link_to "Play", @movie.url, html_options = @movie.html_options %><br />
 </div>

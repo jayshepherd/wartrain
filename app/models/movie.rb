@@ -28,15 +28,16 @@ class Movie < Content
       unless tmdb_movie.nil?
         tmdb_movie.get_info!
       
-        # Update release date
+        # Update release date and trailer
         self.release_date = tmdb_movie.released
+        self.trailer = tmdb_movie.trailer
       
         # Update genres
         tmdb_movie.genres.each do |genre|
           @genre = Genre.find_or_create_by_name(genre.name)
           self.genres<<@genre
         end
-    
+  
         # Update art
         update_poster(nil) unless File.exists?("#{RAILS_ROOT}/public/art/posters/#{posters[:main]}")
         update_background(nil) unless File.exists?("#{RAILS_ROOT}/public/art/backgrounds/#{background}")
