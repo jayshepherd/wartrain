@@ -4,11 +4,11 @@ class MoviesController < ApplicationController
   def index
     if params[:genre].nil?
       @movies = Movie.paginate :page => params[:page],
-                               :conditions => ['sort_title like ?', "#{params[:search]}%"],
+                               :conditions => ["LOWER(sort_title) like ?", "%#{params[:search]}%"],
                                :order => :sort_title, 
                                :per_page => 12
     else
-      sql = "select distinct contents.id from contents inner join contents_genres on 
+      sql = "select contents.id, contents.sort_title from contents inner join contents_genres on 
              contents.id = contents_genres.content_id where type = 'Movie' and 
              genre_id = #{params[:genre]} order by contents.sort_title"
       @genre = Genre.find(params[:genre])

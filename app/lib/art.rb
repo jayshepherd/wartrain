@@ -5,13 +5,15 @@ module Art
      case type
        when :poster 
          path += content.posters[:main]
-       when 
+       when :background
          path += content.background
      end
      save_url(url, path) unless url.nil? 
      case type
        when :poster 
-         resize(content.posters) if File.exists?(path)
+         resize(content.posters, :poster) if File.exists?(path)
+       when :background
+         resize(content.background, :background) if File.exists?(path)
      end
    end
 
@@ -35,29 +37,41 @@ private
     end
   end
   
-  def self.resize(posters)
+  def self.resize(images, type)
     require 'RMagick'
     include Magick
     
-    begin
-      img = Magick::Image.read("#{RAILS_ROOT}/public"+posters[:main]).first
+    case
+      when type = :poster
+        begin
+          debugger
+          img = Magick::Image.read("#{RAILS_ROOT}/public"+images[:main]).first
     
-      thumb = img.resize_to_fit(300, 450)
-      thumb.write "#{RAILS_ROOT}/public"+posters[:main]
+          thumb = img.resize_to_fit(300, 450)
+          thumb.write "#{RAILS_ROOT}/public"+images[:main]
     
-      thumb = img.resize_to_fit(165, 248)
-      thumb.write "#{RAILS_ROOT}/public"+posters[:medium]
+          thumb = img.resize_to_fit(165, 248)
+          thumb.write "#{RAILS_ROOT}/public"+images[:medium]
     
-      thumb = img.resize_to_fit(150, 225)
-      thumb.write "#{RAILS_ROOT}/public"+posters[:small]
+          thumb = img.resize_to_fit(150, 225)
+          thumb.write "#{RAILS_ROOT}/public"+images[:small]
     
-      img = Magick::Image.read("#{RAILS_ROOT}/public/art/posters/blank.png").first
-      overlay = Magick::Image.read("#{RAILS_ROOT}/public"+posters[:small]).first
-      img.composite!(overlay, CenterGravity, MultiplyCompositeOp)
-      img.write "#{RAILS_ROOT}/public"+posters[:small]
-    rescue
-      nil
-    end
+          img = Magick::Image.read("#{RAILS_ROOT}/public/art/posters/blank.png").first
+          overlay = Magick::Image.read("#{RAILS_ROOT}/public"+images[:small]).first
+          img.composite!(overlay, CenterGravity, MultiplyCompositeOp)
+          img.write "#{RAILS_ROOT}/public"+images[:small]
+        rescue
+          nil
+        end
+      when type = :background
+        begin
+          img = Magick::Image.read("#{RAILS_ROOT}/public"+images).first
+          final = img.resize_to_fit(1920, 1080)
+          final.write "#{RAILS_ROOT}/public"+images
+        rescue
+          nil
+        end
+      end
   end
   
 end

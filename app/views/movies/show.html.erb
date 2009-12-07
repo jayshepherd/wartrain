@@ -1,6 +1,11 @@
 <div style="background-image:url('<%= @movie.background %>'); background-size: 100%; 
-	        background-repeat:no-repeat; width:1920px; height:1080px;">
-<h2><%= @movie.title %></h2>
-<%= link_to "Watch Trailer", @movie.trailer.to_s unless @movie.trailer.empty? %><br />
-<%= link_to "Play", @movie.url, html_options = @movie.html_options %><br />
+	   background-repeat:no-repeat; width:1920px; height:1080px;">
+<div style="background-image:url('/art/backgrounds/blank.png'); padding:10px; bottom:0;">
+<h1><%= @movie.title %></h1>
+<% unless @movie.description.blank? %>
+<p><%= @movie.description %></p>
+<% end %>
+<h2><%= link_to "Watch Trailer", @movie.trailer.to_s unless @movie.trailer.empty? %></h2>
+<h2><%= link_to "Play", @movie.url, html_options = @movie.html_options %></h2>
+</div>
 </div>

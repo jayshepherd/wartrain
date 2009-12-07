@@ -1,4 +1,5 @@
 class Movie < Content
+  # themoviedb.org API key
   KEY = '1d458d21d26c0b91de5a7b6f2cffe795'
   
   # Callbacks
@@ -31,6 +32,7 @@ class Movie < Content
         # Update release date and trailer
         self.release_date = tmdb_movie.released
         self.trailer = tmdb_movie.trailer
+        self.description = tmdb_movie.overview
       
         # Update genres
         tmdb_movie.genres.each do |genre|

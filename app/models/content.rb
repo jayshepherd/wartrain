@@ -11,6 +11,7 @@ class Content < ActiveRecord::Base
   
   # Virtual Attributes
   def url
+    debugger
     paths = ''
     assets.each {|a| paths<<a.path}
     if paths['/VIDEO_TS/']
@@ -31,7 +32,8 @@ class Content < ActiveRecord::Base
     paths = ''
     assets.each {|a| paths<<a.path}
     
-    if (paths.upcase.scan('/VIDEO_TS/').length > 0) or (paths.upcase.scan(".ISO").length > 0)
+    if (paths.upcase.scan('/VIDEO_TS/').length > 0) or (paths.upcase.scan(".ISO").length > 0) or 
+       (paths.upcase.scan(".IMG").length > 0)
       # TVID="Play" name="Play" zcd="2" vod=""
       @html_options.merge({:vod => "", :zcd => "2"})
     else   

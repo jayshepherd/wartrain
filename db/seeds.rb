@@ -15,7 +15,8 @@ asset_types = {
   'Mastroka'=>'\.mkv$',
   'MPEG Transport Stream'=>'\.ts$',
   'MPEG Transport Stream Container Extension'=>'\.m2ts$',
-  'VIDEO_TS Folder'=>'\/VIDEO_TS\/'
+  'VIDEO_TS Folder'=>'\/VIDEO_TS\/',
+  'Windows Media Video'=>'\.wmv$'
 }
 
 asset_types.each do |key,value|
