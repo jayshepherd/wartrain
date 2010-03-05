@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(:version => 20091207021432) do
     t.integer  "promotion_id"
     t.string   "imdb_id"
     t.string   "trailer"
-    t.string   "description"
+    t.text     "description"
   end
 
   create_table "contents_genres", :id => false, :force => true do |t|

@@ -22,5 +22,3 @@ asset_types = {
 asset_types.each do |key,value|
   AssetType.find_or_create_by_name_and_regex(key,value).save!
 end
-
-
