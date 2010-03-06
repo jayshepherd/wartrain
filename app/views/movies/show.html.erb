@@ -1,13 +1,13 @@
-<table style="background-image:url('<%= @movie.background %>'); background-size: 100%; 
-	   background-repeat:no-repeat; width:1920px; height:1080px;" width="1920" height="1080">
-	<tr>
-		<td><h1><%= @movie.title %></h1></td>
-	</tr>
-    <tr><td><% unless @movie.description.blank? %>
-		<p><%= @movie.description %></p>
-		<% end %></td>
-	</tr>
-	<tr>
-		<td><h2><%= link_to "Play", @movie.url, html_options = @movie.html_options %></h2></td>
-	</tr>
-<table>
+<body style="background-image:url('<%= @movie.background %>'); background-size: 100%; 
+	   background-repeat:no-repeat;">
+	
+<p style="color: green"><%= flash[:notice] %></p>
+
+<h1><%= @movie.title %></h1>
+
+<% unless @movie.description.blank? %>
+	<p><%= @movie.description %></p>
+<% end %>
+<h2><%= link_to "Play", @movie.url, html_options = @movie.html_options %></h2>
+
+</body>

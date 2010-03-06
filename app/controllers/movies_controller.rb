@@ -36,6 +36,7 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
+    render :layout => "show_movie"
   end
   
   def watch  
