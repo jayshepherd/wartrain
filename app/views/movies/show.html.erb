@@ -1,5 +1,4 @@
-<body style="background-image:url('<%= @movie.background %>'); background-size: 100%; 
-	   background-repeat:no-repeat;">
+<body background="<% @movie.background %>">
 	
 <p style="color: green"><%= flash[:notice] %></p>
 
@@ -8,6 +7,9 @@
 <% unless @movie.description.blank? %>
 	<p><%= @movie.description %></p>
 <% end %>
+
+<br />
+
 <h2><%= link_to "Play", @movie.url, html_options = @movie.html_options %></h2>
 
 </body>
