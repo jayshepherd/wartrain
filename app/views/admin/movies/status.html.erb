@@ -1,7 +1,7 @@
 <div class='admin_status'>
 	<% if @movies.nil? then %>
-		<%= "Successfully updated #{@movie.title}" %>
+		<%= "#{@movie.title} queued for metadata update" %>
 	<% else %>
-		<%= "Successfully updated #{@movies.count} movies" %>
+		<%= "All #{@movies.count} movies queued for metadata update" %>
 	<% end %>
 </div>

@@ -1,17 +1,12 @@
 class Asset < ActiveRecord::Base
-  
-  # Associations
   belongs_to :content
   belongs_to :directory
   belongs_to :asset_type
   
-  # Validations
   validate :file_must_exist
   
-  # Callbacks
   after_create :create_content
   
-  # Virtual Attributes
   def to_label # for ActiveScaffold
     path
   end

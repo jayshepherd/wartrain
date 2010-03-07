@@ -2,14 +2,18 @@
 	
 <p style="color: green"><%= flash[:notice] %></p>
 
-<h1><%= @movie.title %></h1>
-
-<% unless @movie.description.blank? %>
-	<p><%= @movie.description %></p>
-<% end %>
-
-<br />
-
-<h2><%= link_to "Play", @movie.url, html_options = @movie.html_options %></h2>
+<table>
+	<tr><td class='header'><h1><%= @movie.title %></h1></td></tr>
+	<tr />
+	<tr><td class='footer'>
+		<p><%= @movie.description unless @movie.description.blank? %></p>
+	
+		<p>
+			<%= "Release Date: #{@movie.release_date.to_s} <br />" unless @movie.release_date.blank? %>
+			<%= "Running Time: #{@movie.running_time.to_s} minutes <br />" unless @movie.running_time.blank? %>
+		</p>
+		<p><%= link_to image_tag('play.png', :size => '48x48'), @movie.url, html_options = @movie.html_options %></p>
+	</td></tr>
+</table>
 
 </body>

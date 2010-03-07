@@ -1,0 +1,7 @@
+<div class='admin_status'>
+	<% if @directories.nil? then %>
+		<%= "#{@directory.physical_path} queued for background scanning" %>
+	<% else %>
+		<%= "All #{@directories.count} directories queued for background scanning" %>
+	<% end %>
+</div>

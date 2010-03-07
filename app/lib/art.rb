@@ -44,7 +44,6 @@ private
     case
       when type = :poster
         begin
-          debugger
           img = Magick::Image.read("#{RAILS_ROOT}/public"+images[:main]).first
     
           thumb = img.resize_to_fit(300, 450)

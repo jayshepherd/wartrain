@@ -2,10 +2,8 @@ class Movie < Content
   # themoviedb.org API key
   KEY = '1d458d21d26c0b91de5a7b6f2cffe795'
   
-  # Callbacks
   after_create :populate_metadata
 
-  # Public Instance Methods
   def populate_metadata
     require 'tmdb_party'
     require 'imdb'
@@ -33,6 +31,7 @@ class Movie < Content
         self.release_date = tmdb_movie.released
         self.trailer = tmdb_movie.trailer
         self.description = tmdb_movie.overview
+        self.running_time = tmdb_movie.runtime
       
         # Update genres
         tmdb_movie.genres.each do |genre|
@@ -45,7 +44,7 @@ class Movie < Content
         update_background(nil) unless File.exists?("#{RAILS_ROOT}/public/art/backgrounds/#{background}")
       end
     end
-    self.save
+    self.save!
   end
   
   def update_poster(url)
@@ -58,7 +57,7 @@ class Movie < Content
         tmdb_movie = tmdb.imdb_lookup('tt'+imdb_id)
       rescue
       end
-      url = tmdb_movie.posters.first["cover"] unless tmdb_movie.posters.empty?
+      url = tmdb_movie.posters.first['cover'] unless tmdb_movie.posters.empty?
     end
     Art.update_art(self, url, :poster) unless url.blank?
   end
@@ -73,8 +72,7 @@ class Movie < Content
         tmdb_movie = tmdb.imdb_lookup('tt'+imdb_id)
       rescue
       end
-      debugger
-      url = tmdb_movie.backdrops.first["original"] unless tmdb_movie.backdrops.empty?
+      url = tmdb_movie.backdrops.first['original'] unless tmdb_movie.backdrops.empty?
     end
     Art.update_art(self, url, :background) unless url.blank?
   end

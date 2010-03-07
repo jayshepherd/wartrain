@@ -1,4 +1,4 @@
 <% @content_types.each do |type| %>
 	<h1><%= link_to type.name.titleize, :controller => type.name %>
 <% end %>
-<h1><%= link_to 'Admin', :controller => 'admin/directories' if request.env['HTTP_USER_AGENT'].index('Syabas').nil? %>
+<h1><%= link_to 'Admin', :controller => 'admin/directories' if request.env['HTTP_USER_AGENT'].index('Syabas').nil? %></h1>

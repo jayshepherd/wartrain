@@ -8,39 +8,21 @@ class Admin::DirectoriesController < ApplicationController
     config.create.columns = [:content_type, :physical_path, :nmt_path, :asset_types]
     config.update.columns = [:content_type, :physical_path, :nmt_path, :asset_types, :digest]
     config.action_links.add(:scan, :controller => :directories, :type => :record)
+    config.action_links.add(:scan_all, :controller => :directories, :type => :table)
     config.columns[:asset_types].form_ui = :select
     config.columns[:content_type].form_ui = :select
   end
   
-  def self.scan_all
-    directories = Directory.find(:all)
-    directories.each do |directory|
-      directory.scan
-    end
+  def scan_all
+    @directories = Directory.find(:all)
+    @directories.each { |directory| directory.send_later(:scan) }
+    render :template => 'admin/directories/status', :layout => false
   end
   
   def scan
-    directory = Directory.find(params[:id])
-    results = directory.scan
-    if results[:scanned] 
-      if results[:added] == 0
-        @message = 'No new assets were added.'
-      elsif results[:added] == 1 
-        @messsage = 'One new asset was added.'
-      else
-        @message = results[:added].to_s+' new assets were added.'
-      end
-      if results[:deleted] == 0 
-        @message << ' No assets were delete.'
-      elsif results[:deleted] == 1
-        @message << ' One asset was deleted.'
-      else
-        @message << ' '+results[:deleted].to_s+' assets were deleted.'
-      end
-    else
-      @message = "Scan skipped.  The directory hasn't changed."
-    end # unless @digest
-    render :layout => false
+    @directory = Directory.find(params[:id])
+    @directory.send_later :scan
+    render :template => 'admin/directories/status', :layout => false
   end
   
 end
