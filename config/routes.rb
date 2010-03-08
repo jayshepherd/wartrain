@@ -39,6 +39,7 @@ ActionController::Routing::Routes.draw do |map|
        admin.resources :asset_types, :active_scaffold => true
        admin.resources :genres, :active_scaffold => true
        admin.resources :promotions, :active_scaffold => true
+       admin.resources :delayed_jobs, :active_scaffold => true
      end
      
    map.connect 'admin', :controller => 'admin/directories'

@@ -44,5 +44,4 @@ Rails::Initializer.run do |config|
   config.gem 'json', :version => '~> 1.1.7'
   config.gem 'tmdb_party', :version => '~> 0.4.1'
   config.gem 'imdb', :verson => '~> 0.5.1'
-  config.gem 'delayed_job', :version => '~> 1.8.4'
 end
