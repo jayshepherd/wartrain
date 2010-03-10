@@ -9,9 +9,7 @@
 			<%= "Release Date: #{@movie.release_date.to_s} <br />" unless @movie.release_date.blank? %>
 			<%= "Running Time: #{@movie.running_time.to_s} minutes <br />" unless @movie.running_time.blank? %>
 		</p>
-		<p>
-			<%= link_to image_tag('play.png', :size => '48x48'), @movie.url, html_options = @movie.html_options %>
-		</p><br />
+		<p><br/><%= link_to image_tag('play.png', :size => '48x48'), @movie.url, html_options = @movie.html_options %></p>
 	</td></tr>
 </table>
 
