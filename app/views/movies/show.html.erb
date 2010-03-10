@@ -3,7 +3,7 @@
 <table cellpadding='25' width='100%'>
 	<tr><td height='500'></td></tr>
 	<tr><td background='/art/backgrounds/shade.png'>
-		<p><h1><%= @movie.title %></h1></p>
+		<p><h2><%= @movie.title %></h2></p>
 		<p><%= @movie.description unless @movie.description.blank? %></p>
 		<p>
 			<%= "Release Date: #{@movie.release_date.to_s} <br />" unless @movie.release_date.blank? %>
