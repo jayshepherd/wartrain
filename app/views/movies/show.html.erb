@@ -4,7 +4,9 @@
 
 <table>
 	<tr><td class='header' background='/art/backgrounds/shade.png'><h1><%= @movie.title %></h1></td></tr>
-	<tr />
+	<% 20.times do %>
+		<tr><td><br /></td></tr>
+	<% end %>
 	<tr><td class='footer' background='/art/backgrounds/shade.png'>
 		<p><%= @movie.description unless @movie.description.blank? %></p>
 	
