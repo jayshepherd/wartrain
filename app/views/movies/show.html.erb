@@ -3,13 +3,14 @@
 <table cellpadding='25' width='100%'>
 	<tr><td height='300'></td></tr>
 	<tr><td background='/art/backgrounds/shade.png'>
-		<p><h1><%= @movie.title %></h1></p>
-		<%= @movie.description unless @movie.description.blank? %>
+		<p><h1><%= @movie.title %></h1>
+		   <%= @movie.description unless @movie.description.blank? %>
+		</p>
 		<p>
 			<%= "Release Date: #{@movie.release_date.to_s} <br />" unless @movie.release_date.blank? %>
 			<%= "Running Time: #{@movie.running_time.to_s} minutes <br />" unless @movie.running_time.blank? %>
 		</p>
-		<p><br/><%= link_to image_tag('play.png', :size => '48x48'), @movie.url, html_options = @movie.html_options %></p>
+		<p><br /><%= link_to image_tag('play.png', :size => '48x48'), @movie.url, html_options = @movie.html_options %></p>
 	</td></tr>
 </table>
 
