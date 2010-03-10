@@ -105,7 +105,6 @@ td.header {
 	top: 0px;
 	left: 0px;
 	padding: 10px;
-	background-image: url(../art/backgrounds/shade.png);
 }
 
 td.footer { 
@@ -113,5 +112,4 @@ td.footer {
 	position: absolute; 
 	bottom: 0px; 
 	left: 0px;
-    background-image: url(../art/backgrounds/shade.png);
 }
