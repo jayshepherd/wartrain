@@ -98,12 +98,3 @@ table.content {
 td {
 	background-repeat:no-repeat;
 }
-
-td.header {
-	width: 100%;
-	padding: 10px;
-}
-
-td.footer { 
-	width: 100%; 
-}
