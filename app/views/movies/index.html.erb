@@ -51,13 +51,18 @@
 	        </td>
 		</tr>
 		<tr>
-			<td><%= link_to "Newest", {:controller => 'movies', :action => 'newest'}, 
-	                                  {:class => 'bottom_links', :TVID => 'GREEN'} %>
+			<td><%= link_to "New Additions", {:controller => 'movies', :action => 'new_additions'}, 
+	                                         {:class => 'bottom_links', :TVID => 'GREEN'} %>
+			</td>
+		</tr>
+		<tr>
+			<td><%= link_to "New Releases", {:controller => 'movies', :action => 'new_releases'}, 
+	                                        {:class => 'bottom_links', :TVID => 'YELLOW'} %>
 			</td>
 		</tr>
 		<tr>
 			<td><%= link_to "Genres", {:controller => 'movies', :action => 'genres'}, 
-	                                  {:class => 'bottom_links', :TVID => 'YELLOW'} %>
+	                                  {:class => 'bottom_links'} %>
 			</td>
 		</tr>
 	</table>

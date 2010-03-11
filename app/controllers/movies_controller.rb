@@ -16,8 +16,14 @@ class MoviesController < ApplicationController
     end
   end
   
-  def newest
+  def new_additions
     @movies = Movie.paginate :page => params[:page], :order => 'created_at DESC',
+                             :per_page => 12
+    render :template => 'movies/index'
+  end
+  
+  def new_releases
+    @movies = Movie.paginate :page => params[:page], :order => 'release_date DESC',
                              :per_page => 12
     render :template => 'movies/index'
   end
