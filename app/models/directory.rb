@@ -29,7 +29,7 @@ class Directory < ActiveRecord::Base
       self.digest = @new_digest 
       
       # Delete old assets
-      assets.each { |asset| asset.delete unless File.exists?(physical_path+asset.path) }
+      assets.each { |asset| asset.destroy unless File.exists?(physical_path+asset.path) }
       
       # Add new assets
       @list.each do |path|

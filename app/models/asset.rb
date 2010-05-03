@@ -6,6 +6,7 @@ class Asset < ActiveRecord::Base
   validate :file_must_exist
   
   after_create :create_content
+  after_destroy :destroy_empty_content
   
   def to_label # for ActiveScaffold
     path
@@ -28,4 +29,7 @@ class Asset < ActiveRecord::Base
       end
     end
     
+    def destroy_empty_content
+      content.destroy if content.assets.empty?
+    end
 end

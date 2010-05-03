@@ -1,5 +1,5 @@
 class Content < ActiveRecord::Base
-  has_many :assets, :after_remove => :delete_empty_content
+  has_many :assets
   has_and_belongs_to_many :genres
   
   before_save :populate_sort_title
@@ -76,10 +76,6 @@ class Content < ActiveRecord::Base
        File.delete(path) if File.exists?(path) 
        path = "#{RAILS_ROOT}/public/playlists/#{id.to_s}.jsp"
        File.delete(path) if File.exists?(path)
-    end
-    
-    def delete_empty_content
-      self.delete if assets.empty?
     end
     
 end
