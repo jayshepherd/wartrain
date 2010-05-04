@@ -74,6 +74,8 @@ class Content < ActiveRecord::Base
     def delete_files
        path = "#{RAILS_ROOT}/public/art/posters/#{id.to_s}*.jpg"
        File.delete(path) if File.exists?(path) 
+       path = "#{RAILS_ROOT}/public/art/backgrounds/#{id.to_s}*.jpg"
+       File.delete(path) if File.exists?(path)
        path = "#{RAILS_ROOT}/public/playlists/#{id.to_s}.jsp"
        File.delete(path) if File.exists?(path)
     end
